@@ -19,48 +19,48 @@ const routes = [
     component: Index,
     children: [
       {
-        path: 'recommend', // 推荐页面
-        name: 'recommend',
+        path: 'tuijian', // 推荐页面
+        name: 'tuijian',
         component: Recommend
       },
       {
-        path: 'audiobook', // 有声书
-        name: 'audiobook',
+        path: 'youshengshu', // 有声书
+        name: 'youshengshu',
         component: AudioBook
       },
       {
-        path: 'crosstalk', // 相声
-        name: 'crosstalk',
+        path: 'xiangsheng', // 相声
+        name: 'xiangsheng',
         component: CrossTalk
       },
       {
-        path: 'music', // 音乐
-        name: 'music',
+        path: 'yinyue', // 音乐
+        name: 'yinyue',
         component: Music
       },
       {
-        path: 'children', // 儿童
-        name: 'children',
+        path: 'ertong', // 儿童
+        name: 'ertong',
         component: Children
       },
       {
-        path: 'humanity', // 人文
-        name: 'humanity',
+        path: 'renwen', // 人文
+        name: 'renwen',
         component: Humanity
       },
       {
-        path: 'emotion', // 情感
-        name: 'emotion',
+        path: 'qinggan', // 情感
+        name: 'qinggan',
         component: Emotion
       },
       {
-        path: 'history', // 历史
-        name: 'history',
+        path: 'lishi', // 历史
+        name: 'lishi',
         component: History
       },
       {
-        path: 'science', // 科技
-        name: 'science',
+        path: 'keji', // 科技
+        name: 'keji',
         component: Science
       },
       {
@@ -70,7 +70,7 @@ const routes = [
       },
       {
         path: '/index',
-        redirect: '/index/recommend'
+        redirect: '/index/tuijian'
       }
     ]
   },
