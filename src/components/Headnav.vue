@@ -1,6 +1,6 @@
 <template>
     <ul>
-     <router-link v-for="data in $store.state.headData" :to='data.moduleKey' :tag='li' :key='data.order' :activeClass='active'>
+     <router-link v-for="data in $store.state.headData" :to="data.moduleKey" tag='li' :key='data.order' activeClass='active'>
          {{data.moduleName}}
      </router-link>
     </ul>
@@ -22,7 +22,7 @@ ul{
         float: left;
         width: 0.52rem;
         height: 0.2rem;
-        padding: 0.07rem 0.125rem;
+        margin: 0.07rem 0.125rem;
         font: 0.14rem/0.2rem "宋体";
         color: #72727b;
     }
@@ -30,8 +30,12 @@ ul{
 .active{
     width: 0.52rem;
     height: 0.2rem;
-    padding: 0.07rem 0.125rem;
+    margin: 0.07rem 0.125rem;
     font: 0.14rem/0.2rem "宋体";
     color: #40404c;
+    border-bottom: 3px solid red;
+}
+ul{
+    border-bottom:1px solid #e8e8ee;
 }
 </style>
