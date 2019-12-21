@@ -1,0 +1,114 @@
+{
+  "id": "",
+  "name": "",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "1111441",
+      "name": "播放",
+      "font_class": "bofang",
+      "unicode": "e63a",
+      "unicode_decimal": 58938
+    },
+    {
+      "icon_id": "2104636",
+      "name": "上升",
+      "font_class": "web-icon-",
+      "unicode": "e6db",
+      "unicode_decimal": 59099
+    },
+    {
+      "icon_id": "2672194",
+      "name": "耳机",
+      "font_class": "erji",
+      "unicode": "e654",
+      "unicode_decimal": 58964
+    },
+    {
+      "icon_id": "2986427",
+      "name": "搜索--1",
+      "font_class": "search",
+      "unicode": "e501",
+      "unicode_decimal": 58625
+    },
+    {
+      "icon_id": "3015590",
+      "name": "列表",
+      "font_class": "liebiao",
+      "unicode": "e632",
+      "unicode_decimal": 58930
+    },
+    {
+      "icon_id": "3033700",
+      "name": "减号",
+      "font_class": "iconjian",
+      "unicode": "e52d",
+      "unicode_decimal": 58669
+    },
+    {
+      "icon_id": "5773382",
+      "name": "删 除",
+      "font_class": "shanchu",
+      "unicode": "e611",
+      "unicode_decimal": 58897
+    },
+    {
+      "icon_id": "6065392",
+      "name": "分类",
+      "font_class": "tubiaoku-",
+      "unicode": "e686",
+      "unicode_decimal": 59014
+    },
+    {
+      "icon_id": "6068271",
+      "name": "喜马拉雅",
+      "font_class": "ximalaya",
+      "unicode": "e606",
+      "unicode_decimal": 58886
+    },
+    {
+      "icon_id": "6148381",
+      "name": "下降",
+      "font_class": "xiajiang",
+      "unicode": "e633",
+      "unicode_decimal": 58931
+    },
+    {
+      "icon_id": "8842895",
+      "name": "排行1",
+      "font_class": "paihang",
+      "unicode": "e630",
+      "unicode_decimal": 58928
+    },
+    {
+      "icon_id": "8842897",
+      "name": "排行3",
+      "font_class": "paihang1",
+      "unicode": "e631",
+      "unicode_decimal": 58929
+    },
+    {
+      "icon_id": "8842967",
+      "name": "排行2",
+      "font_class": "paihang2",
+      "unicode": "e634",
+      "unicode_decimal": 58932
+    },
+    {
+      "icon_id": "9618161",
+      "name": "排行榜",
+      "font_class": "paihangbang",
+      "unicode": "e771",
+      "unicode_decimal": 59249
+    },
+    {
+      "icon_id": "9626929",
+      "name": "声音",
+      "font_class": "shengyin",
+      "unicode": "e87c",
+      "unicode_decimal": 59516
+    }
+  ]
+}

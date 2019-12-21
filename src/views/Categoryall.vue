@@ -1,5 +1,5 @@
 <template>
     <div>
-        detail
+        categoryall
     </div>
 </template>

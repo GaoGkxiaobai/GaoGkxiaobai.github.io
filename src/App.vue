@@ -1,69 +1,103 @@
 <template>
-  <div id="main">
-    <!-- {{aname}} -->
-    <!-- <div class="chengshi" @click=""> -->
-
-      <!-- 城市 -->
-    <!-- </div> -->
-    <tabber v-if="isShow"></tabber>
-    <!-- <tabber v-if="$store.state.isShow"></tabber> -->
-    <!-- 路由容器 -->
-
+  <div>
     <router-view></router-view>
-    <!-- <narban name="my name is narban"></narban> -->
-    <!-- <maizuo></maizuo> -->
   </div>
 </template>
 
 <script>
-// import narban from './components/narban'
-// import maizuo from './components/maizuo'
-import tabber from './components/Tabbar'
-import { mapState } from 'vuex'
 
 export default {
-  data () {
-    return {
-      aname: 'ggk'
-    }
-  },
-  computed: {
-    ...mapState(['isShow'])
-  },
-  components: {
-    // narban
-    // maizuo,
-    tabber
-  },
-  methods: {
 
-  }
 }
 </script>
 <style lang="scss" scoped>
-  // #main{
-  //   height: 200px;
-  //   width: 200px;
-  //   background-color: red;
-  //   color: white;
-  // }
-  *{
-    margin: 0;
-    padding: 0;
-  }
-  ul,ol,li{
-    list-style: none;
-  }
+html,
+body,
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+dl,
+dt,
+dd,
+ul,
+ol,
+li,
+img,
+input,
+fieldset,
+legend,
+figure,
+figcaption {
+	margin: 0;
+	padding: 0;
+}
 
-  html,body{
-    height: 100%;
+ul,
+ol,
+li {
+	list-style: none;
+}
 
-  }
-  #main{
-    // height: 100%;
-    // position: relative;
-    // padding-bottom: 50px;
-    // margin: 0;
-    // padding: 0;
-  }
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	font-size: 16px;
+	font-weight: normal;
+}
+
+b,
+strong {
+	font-weight: normal;
+}
+
+em,
+i {
+	font-style: normal;
+}
+
+a {
+	text-decoration: none;
+}
+
+img {
+	display: block;
+	border: none;
+}
+
+input {
+	outline: none;
+}
+
+/*取消输入框的蓝色边框线 */
+
+.clear:after {
+	content: ".";
+	height: 0;
+	overflow: hidden;
+	display: block;
+	clear: both;
+	visibility: hidden;
+}
+
+.clearfix {
+	*zoom: 1;
+}
+
+/*解决IE的兼容问题*/
+
+.fl {
+	float: left;
+}
+
+.fr {
+	float: right;
+}
+
 </style>

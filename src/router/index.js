@@ -1,76 +1,143 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Film from '@/views/Film.vue'
-// import Cinema from '@/views/Cinema.vue'
-// import Center from '@/views/Center.vue'
-import Nowplaying from '@/views/Film/maizuo.vue'
-import Comingsoon from '@/views/Film/Comingsoon.vue'
-import Detail from '@/views/Detail'
-import Login from '@/views/Login'
-
+import Index from '@/views/Index'
+import Recommend from '@/views/index/Recommend'
+import AudioBook from '@/views/index/AudioBook'
+import CrossTalk from '@/views/index/CrossTalk'
+import Music from '@/views/index/Music'
+import Children from '@/views/index/Children'
+import Humanity from '@/views/index/Humanity'
+import Emotion from '@/views/index/Emotion'
+import History from '@/views/index/History'
+import Science from '@/views/index/Science'
+import More from '@/views/index/More'
 Vue.use(VueRouter)
 
 const routes = [
   {
-    path: '/film',
-    component: Film,
+    path: '/index',
+    component: Index,
     children: [
       {
-        // path:"/film/nowplaying",
-        path: 'nowplaying',
-        name: 'nowplaying',
-        component: Nowplaying
+        path: 'recommend', // 推荐页面
+        name: 'recommend',
+        component: Recommend
       },
       {
-        path: 'comingsoon',
-        name: 'comingsoon',
-        component: Comingsoon
+        path: 'audiobook', // 有声书
+        name: 'audiobook',
+        component: AudioBook
       },
       {
-        path: '/film',
-        redirect: '/film/nowplaying'
+        path: 'crosstalk', // 相声
+        name: 'crosstalk',
+        component: CrossTalk
+      },
+      {
+        path: 'music', // 音乐
+        name: 'music',
+        component: Music
+      },
+      {
+        path: 'children', // 儿童
+        name: 'children',
+        component: Children
+      },
+      {
+        path: 'humanity', // 人文
+        name: 'humanity',
+        component: Humanity
+      },
+      {
+        path: 'emotion', // 情感
+        name: 'emotion',
+        component: Emotion
+      },
+      {
+        path: 'history', // 历史
+        name: 'history',
+        component: History
+      },
+      {
+        path: 'science', // 科技
+        name: 'science',
+        component: Science
+      },
+      {
+        path: 'more', // 更多
+        name: 'more',
+        component: More
+      },
+      {
+        path: '/index',
+        redirect: '/index/recommend'
       }
     ]
   },
   {
-    path: '/cinema',
-    component: () => import('@/views/Cinema')
+    path: '/top', // 排行页面
+    component: () => import('@/views/Top.vue'),
+    children: [
+      {
+        path: 'free',
+        component: () => import('@/views/top/Free.vue'), // 免费榜
+        children: [
+          {
+            path: 'all',
+            component: () => import('@/views/top/free/All.vue') // 热门
+          },
+          {
+            path: 'youshengshu',
+            component: () => import('@/views/top/free/Youshengshu.vue')
+          },
+          {
+            path: 'xiangsheng',
+            component: () => import('@/views/top/free/Xiangsheng.vue')
+          },
+          {
+            path: 'ertong',
+            component: () => import('@/views/top/free/Ertong.vue')
+          },
+          {
+            path: '/free',
+            redirect: '/free/all'
+          }
+        ]
+      },
+      {
+        path: 'rise', // 飙升榜
+        component: () => import('@/views/top/Rise.vue'),
+        children: [
+          {
+            path: 'all',
+            component: () => import('@/views/top/rise/All.vue') // 总榜
+          }
+        ]
+      },
+      {
+        path: '/top',
+        redirect: '/top/free'
+      }
+    ]
   },
   {
-    path: '/center',
-    component: () => import('@/views/Center.vue')
-  },
-  {
-    path: '/login',
-    component: Login
-  },
-  {
-    path: '/city',
-    component: () => import('@/views/City.vue')
-  },
-  {
-    path: '/detail/:myid', // 动态路由
-    component: Detail,
+    path: '/detail/:myid',
     props: true,
-    name: 'MyDetail' // 命名路由
+    component: () => import('@/views/Detail.vue') // 详情
+  },
+  {
+    path: '/categoryall',
+    props: true,
+    component: () => import('@/views/Categoryall.vue') // 全部分类
   },
   {
     path: '*',
-    redirect: '/film'
+    redirect: '/index'
   }
-  // {
-  //   path: '/about',
-  //   name: 'about',
-  //   // route level code-splitting
-  //   // this generates a separate chunk (about.[hash].js) for this route
-  //   // which is lazy-loaded when the route is visited.
-  //   component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
-  // }
 ]
 
 const router = new VueRouter({
-  mode: 'history',
-  // base: process.env.BASE_URL,//应用的基路径。
+  mode: 'hash',
   routes
 })
 

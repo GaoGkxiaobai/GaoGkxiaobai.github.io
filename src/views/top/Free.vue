@@ -1,5 +1,6 @@
 <template>
     <div>
-        detail
+        free
+
     </div>
 </template>
