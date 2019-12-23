@@ -100,7 +100,7 @@ const routes = [
         ]
       },
       {
-        path: '/*',
+        path: '/top',
         redirect: '/top/free/all'
       }
     ]
