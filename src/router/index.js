@@ -19,6 +19,7 @@ const routes = [
     path: '/index',
     component: Index,
     children: [
+
       {
         path: 'tuijian', // 推荐页面
         name: 'tuijian',
@@ -106,6 +107,7 @@ const routes = [
     ]
   },
   {
+<<<<<<< HEAD
     path: '/ting', // 听单
     component: () => import('@/views/listeningList'),
     children: [
@@ -122,6 +124,10 @@ const routes = [
   },
   {
     path: '/detail/:myid',
+=======
+    path: '/detail/:myid/:aid',
+    name: 'detail',
+>>>>>>> 1d0aaa15fa2b4cbef6d78b9f08d38c6e99cac0b7
     props: true,
     component: () => import('@/views/Detail.vue') // 详情
   },
