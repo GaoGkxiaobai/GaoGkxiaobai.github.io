@@ -4,12 +4,20 @@
         {{this.left}}
         {{shishi()}}
     </div> -->
-    <ul class="toprightul">
+    <ul class="toprightul clear">
         <li class="toprightli clear" v-for="(data,index) in list" :key="data.id">
-          <span class="iconfont toprightliic">
-            <!-- &#xe630; -->
+          <span class="iconfont toprightliic color1 spancolor" v-if="index==0">
+            &#xe630;
+          </span>
+          <span class="iconfont toprightliic color2 spancolor" v-else-if="index==1">
+            &#xe634;
+          </span>
+          <span class="iconfont toprightliic color3 spancolor" v-else-if="index==2">
+            &#xe631;
+          </span>
+          <span class="iconfont toprightliic" v-else>
             {{index+1}}
-            </span>
+          </span>
           <img class="toprightliimg" :src="'https://imagev2.xmcdn.com/'+data.albumInfo.cover" alt="">
           <div class="toprightliright" >
             <!-- <img class="toprightliimg" :src="'https://imagev2.xmcdn.com/'+data.albumInfo.cover" alt=""> -->
@@ -141,5 +149,18 @@ export default {
         }
       }
     }
+}
+.spancolor{
+  font-size: 0.2rem;
+  line-height: 0.2rem;
+}
+.color1{
+  color: red;
+}
+.color2{
+  color: orangered;
+}
+.color3{
+  color: orange;
 }
 </style>
