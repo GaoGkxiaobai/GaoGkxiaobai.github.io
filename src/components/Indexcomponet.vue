@@ -25,7 +25,8 @@ export default {
     }
   },
   methods: {
-    indexclick (data) {
+    indexclick (id) {
+      console.log(id)
       this.$router.push(`/detail/${id}`)
     }
   }

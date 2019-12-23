@@ -1,6 +1,5 @@
 <template>
 <indexcomponent></indexcomponent>
-
 </template>
 <script>
 import indexcomponent from '@/components/Indexcomponet'
