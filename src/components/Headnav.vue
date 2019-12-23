@@ -17,6 +17,7 @@ export default {
 </script>
 <style lang="scss" scoped>
 ul{
+  margin-top: 0.5rem;
     width: 100%;
     height: 0.4rem;
     overflow-x: hidden;
@@ -46,15 +47,9 @@ ul{
 .flex {
   width: 100%;
   position: fixed;
-  top: 0.5rem;
-  background: white;
-  z-index: 200;
-}
-.lf {
-  width: 100%;
-  position: fixed;
   top: 0;
   background: white;
   z-index: 200;
 }
+
 </style>

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <headnav :class="isflex?'flex':''" :isflex='ish'></headnav>
+    <headnav :class="isflex?'flex':''"></headnav>
     <swiper
       v-if="$store.state.indexData.focusImages"
       :path="{
@@ -36,7 +36,7 @@
       <li
         v-for="item in boolean?(data.rankingContentInfoList.rankModuleInfoList):(data.albumBriefDetailInfos)"
         :key="item.id"
-        @click="indexclick(item.id)"
+        @click="indexclick(item.id,item.anchorInfo.id)"
       >
         <img :src="'http://imagev2.xmcdn.com/'+item.albumInfo.cover" alt />
         <div>
@@ -134,9 +134,9 @@ export default {
   },
   props: ['boolean'],
   methods: {
-    indexclick (id) {
-      console.log(id)
-      this.$router.push(`/detail/${id}`)
+    indexclick (id, aid) {
+      // this.$router.push(`/detail/${id}`);
+      this.$router.push({ name: 'detail', params: { myid: id, aid: aid } })
     },
     myscroll () {
       if (

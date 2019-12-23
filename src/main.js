@@ -2,11 +2,11 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import store from './store'
-
-// ----引入mintUI
-// import MintUI from 'mint-ui'
-// import 'mint-ui/lib/style.css'
-// Vue.use(MintUI)
+import MintUI from 'mint-ui' // 引入mint-ul框架
+import 'mint-ui/lib/style.css' // 引入 mint-ul 框架的css
+// vue js 唯一入口
+Vue.use(MintUI)
+Vue.config.productionTip = false
 
 Vue.config.productionTip = false
 

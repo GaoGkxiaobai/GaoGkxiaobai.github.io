@@ -35,9 +35,13 @@ display: block;clear: both;visibility: hidden;}
 .fl {float: left;}
 .fr {float: right;}
 .top{
+  position: fixed;
+  top:0;
   width: 100%;
   height: 0.3rem;
   padding: 0.15rem 0.15rem 0.05rem;
+  background: white;
+  z-index: 200;
   img{
     width: 0.7rem;
     height: 0.15rem;

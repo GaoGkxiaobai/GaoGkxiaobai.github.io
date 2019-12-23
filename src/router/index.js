@@ -107,7 +107,8 @@ const routes = [
     ]
   },
   {
-    path: '/detail/:myid',
+    path: '/detail/:myid/:aid',
+    name: 'detail',
     props: true,
     component: () => import('@/views/Detail.vue') // 详情
   },
