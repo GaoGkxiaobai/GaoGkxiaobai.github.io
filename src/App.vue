@@ -99,5 +99,4 @@ input {
 .fr {
 	float: right;
 }
-
 </style>

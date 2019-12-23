@@ -19,6 +19,7 @@ const routes = [
     path: '/index',
     component: Index,
     children: [
+
       {
         path: 'tuijian', // 推荐页面
         name: 'tuijian',
@@ -100,7 +101,7 @@ const routes = [
         ]
       },
       {
-        path: '/*',
+        path: '/top',
         redirect: '/top/free/all'
       }
     ]

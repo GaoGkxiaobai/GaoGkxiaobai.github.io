@@ -23,6 +23,7 @@ export default new Vuex.Store({
     },
     [GET_INDEX_DATA] (state, data) {
       state.indexData = data
+      console.log(state.indexData, 'vuecmmmm')
     }
   },
   actions: {
@@ -38,13 +39,25 @@ export default new Vuex.Store({
         store.commit(GET_HEADNAV_DATA, res.data.data)
       })
     },
-    getindexdata (store) {
-      Axios({
-        url: `https://m.ximalaya.com/m-revision/page/index/queryIndexCategoryTabContent?moduleKey=xiangsheng`
-      }).then(res => {
-        store.commit(GET_INDEX_DATA, res.data.data.moduleContent.moduleRankDatas)
-      })
+    getindexdata (store, name) {
+      if (name == 'tuijian') {
+        Axios({
+          url: `https://m.ximalaya.com/m-revision/page/index/queryIndexTabContent?moduleKey=tuijian`
+
+        }).then(res => {
+          console.log(name, res.data.data.moduleContent, 'Vuex1111')
+          store.commit(GET_INDEX_DATA, res.data.data.moduleContent)
+        })
+      } else {
+        Axios({
+          url: `https://m.ximalaya.com/m-revision/page/index/queryIndexCategoryTabContent?moduleKey=${name}`
+        }).then(res => {
+          console.log(name, res.data.data.moduleContent, 'Vuex222')
+          store.commit(GET_INDEX_DATA, res.data.data.moduleContent)
+        })
+      }
     }
+
   },
   modules: {
     // 分割模块
