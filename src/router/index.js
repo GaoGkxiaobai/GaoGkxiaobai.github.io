@@ -11,6 +11,7 @@ import Emotion from '@/views/index/Emotion'
 import History from '@/views/index/History'
 import Science from '@/views/index/Science'
 import More from '@/views/index/More'
+import topRight from '@/components/topRight'
 Vue.use(VueRouter)
 
 const routes = [
@@ -74,49 +75,33 @@ const routes = [
       }
     ]
   },
+  // {
+  //   path: '/top/:tou/:left', // 排行页面
+  //   component: () => import('@/views/Top.vue'),
+  // }
   {
     path: '/top', // 排行页面
     component: () => import('@/views/Top.vue'),
     children: [
       {
-        path: 'free',
+        path: '/top/:top',
         component: () => import('@/views/top/Free.vue'), // 免费榜
+        props: true,
         children: [
           {
-            path: 'all',
-            component: () => import('@/views/top/free/All.vue') // 热门
+            path: '/top/:top/:left',
+            component: topRight,
+            props: true
           },
           {
-            path: 'youshengshu',
-            component: () => import('@/views/top/free/Youshengshu.vue')
-          },
-          {
-            path: 'xiangsheng',
-            component: () => import('@/views/top/free/Xiangsheng.vue')
-          },
-          {
-            path: 'ertong',
-            component: () => import('@/views/top/free/Ertong.vue')
-          },
-          {
-            path: '/free',
-            redirect: '/free/all'
+            path: '/top/:top',
+            redirect: '/top/:top/all'
           }
         ]
       },
       {
-        path: 'rise', // 飙升榜
-        component: () => import('@/views/top/Rise.vue'),
-        children: [
-          {
-            path: 'all',
-            component: () => import('@/views/top/rise/All.vue') // 总榜
-          }
-        ]
-      },
-      {
-        path: '/top',
-        redirect: '/top/free'
+        path: '/*',
+        redirect: '/top/free/all'
       }
     ]
   },
