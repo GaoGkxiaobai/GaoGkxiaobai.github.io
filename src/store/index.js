@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import Axios from 'axios'
-import { GET_HEADNAV_DATA, GET_INDEX_DATA } from './type'
+import { GET_HEADNAV_DATA, GET_INDEX_DATA, GET_HEIGHT_DATA } from './type'
 // import { Indicator } from 'mint-ui'
 Vue.use(Vuex)
 
@@ -9,7 +9,8 @@ export default new Vuex.Store({
   state: {
     // 全局状态
     headData: [],
-    indexData: []
+    indexData: [],
+    topH: 0
   },
   getters: {
 
@@ -23,7 +24,9 @@ export default new Vuex.Store({
     },
     [GET_INDEX_DATA] (state, data) {
       state.indexData = data
-      console.log(state.indexData, 'vuecmmmm')
+    },
+    [GET_HEIGHT_DATA] (state, h) {
+      state.topH = h
     }
   },
   actions: {
@@ -45,19 +48,19 @@ export default new Vuex.Store({
           url: `https://m.ximalaya.com/m-revision/page/index/queryIndexTabContent?moduleKey=tuijian`
 
         }).then(res => {
-          console.log(name, res.data.data.moduleContent, 'Vuex1111')
           store.commit(GET_INDEX_DATA, res.data.data.moduleContent)
         })
       } else {
         Axios({
           url: `https://m.ximalaya.com/m-revision/page/index/queryIndexCategoryTabContent?moduleKey=${name}`
         }).then(res => {
-          console.log(name, res.data.data.moduleContent, 'Vuex222')
           store.commit(GET_INDEX_DATA, res.data.data.moduleContent)
         })
       }
+    },
+    gettopheight (store, h) {
+      store.commit(GET_HEIGHT_DATA, h)
     }
-
   },
   modules: {
     // 分割模块

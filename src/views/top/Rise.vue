@@ -1,29 +1,5 @@
 <template>
   <div class="paihangLeft">
-    <!-- <router-link to="all" class="paihangLeft_p" tag="p" activeClass="active">热门</router-link>
-    <router-link to="youshengshu" class="paihangLeft_p" tag="p" activeClass="active">有声书</router-link>
-    <router-link to="xiangsheng" class="paihangLeft_p" tag="p" activeClass="active">相声评书</router-link>
-    <router-link to="ertong" class="paihangLeft_p" tag="p" activeClass="active">儿童</router-link>
-    <router-link to="renwen" class="paihangLeft_p" tag="p" activeClass="active">人文</router-link>
-    <router-link to="lishi" class="paihangLeft_p" tag="p" activeClass="active">历史</router-link>
-    <router-link to="yinyue" class="paihangLeft_p" tag="p" activeClass="active">音乐</router-link>
-    <router-link to="jiaoyu" class="paihangLeft_p" tag="p" activeClass="active">教育培训</router-link>
-    <router-link to="waiyu" class="paihangLeft_p" tag="p" activeClass="active">外语</router-link>
-    <router-link to="yule" class="paihangLeft_p" tag="p" activeClass="active">娱乐</router-link>
-    <router-link to="qinggan" class="paihangLeft_p" tag="p" activeClass="active">情感生活</router-link>
-    <router-link to="shancye" class="paihangLeft_p" tag="p" activeClass="active">商业财经</router-link>
-    <router-link to="toutiao" class="paihangLeft_p" tag="p" activeClass="active">头条</router-link>
-    <router-link to="jiankang" class="paihangLeft_p" tag="p" activeClass="active">健康养生</router-link>
-    <router-link to="guangbo" class="paihangLeft_p" tag="p" activeClass="active">广播剧</router-link>
-    <router-link to="xiqu" class="paihangLeft_p" tag="p" activeClass="active">戏曲</router-link>
-    <router-link to="keji" class="paihangLeft_p" tag="p" activeClass="active">IT科技</router-link>
-    <router-link to="lvyou" class="paihangLeft_p" tag="p" activeClass="active">旅游</router-link>
-    <router-link to="yingshi" class="paihangLeft_p" tag="p" activeClass="active">影视</router-link>
-    <router-link to="shishang" class="paihangLeft_p" tag="p" activeClass="active">时尚生活</router-link>
-    <router-link to="qiche" class="paihangLeft_p" tag="p" activeClass="active">汽车</router-link>
-    <router-link to="erciyuan" class="paihangLeft_p" tag="p" activeClass="active">二次元</router-link>
-    <router-link to="diantai" class="paihangLeft_p" tag="p" activeClass="active">电台</router-link> -->
-
     <router-link v-for="data in topLeftList" :key="data.pinyin" :to="data.pinyin" class="paihangLeft_p" tag="p" activeClass="active">{{data.name}}</router-link>
     <p>{{shi()}}</p>
   </div>

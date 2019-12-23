@@ -1,31 +1,8 @@
 <template>
 <div class="box">
   <div class="paihangLeft">
-    <!-- <router-link to="all" class="paihangLeft_p" tag="p" activeClass="active">热门</router-link>
-    <router-link to="youshengshu" class="paihangLeft_p" tag="p" activeClass="active">有声书</router-link>
-    <router-link to="xiangsheng" class="paihangLeft_p" tag="p" activeClass="active">相声评书</router-link>
-    <router-link to="ertong" class="paihangLeft_p" tag="p" activeClass="active">儿童</router-link>
-    <router-link to="renwen" class="paihangLeft_p" tag="p" activeClass="active">人文</router-link>
-    <router-link to="lishi" class="paihangLeft_p" tag="p" activeClass="active">历史</router-link>
-    <router-link to="yinyue" class="paihangLeft_p" tag="p" activeClass="active">音乐</router-link>
-    <router-link to="jiaoyu" class="paihangLeft_p" tag="p" activeClass="active">教育培训</router-link>
-    <router-link to="waiyu" class="paihangLeft_p" tag="p" activeClass="active">外语</router-link>
-    <router-link to="yule" class="paihangLeft_p" tag="p" activeClass="active">娱乐</router-link>
-    <router-link to="qinggan" class="paihangLeft_p" tag="p" activeClass="active">情感生活</router-link>
-    <router-link to="shancye" class="paihangLeft_p" tag="p" activeClass="active">商业财经</router-link>
-    <router-link to="toutiao" class="paihangLeft_p" tag="p" activeClass="active">头条</router-link>
-    <router-link to="jiankang" class="paihangLeft_p" tag="p" activeClass="active">健康养生</router-link>
-    <router-link to="guangbo" class="paihangLeft_p" tag="p" activeClass="active">广播剧</router-link>
-    <router-link to="xiqu" class="paihangLeft_p" tag="p" activeClass="active">戏曲</router-link>
-    <router-link to="keji" class="paihangLeft_p" tag="p" activeClass="active">IT科技</router-link>
-    <router-link to="lvyou" class="paihangLeft_p" tag="p" activeClass="active">旅游</router-link>
-    <router-link to="yingshi" class="paihangLeft_p" tag="p" activeClass="active">影视</router-link>
-    <router-link to="shishang" class="paihangLeft_p" tag="p" activeClass="active">时尚生活</router-link>
-    <router-link to="qiche" class="paihangLeft_p" tag="p" activeClass="active">汽车</router-link>
-    <router-link to="erciyuan" class="paihangLeft_p" tag="p" activeClass="active">二次元</router-link>
-    <router-link to="diantai" class="paihangLeft_p" tag="p" activeClass="active">电台</router-link> -->
 
-    <router-link v-for="data in topLeftList" :key="data.pinyin" :to="'/top/'+top+'/'+data.pinyin" class="paihangLeft_p" tag="p" activeClass="active" >{{data.name}}</router-link>
+    <router-link v-for="data in topLeftList[this.top]"  :key="data.pinyin" :to="'/top/'+top+'/'+data.pinyin"  class="paihangLeft_p" tag="p" activeClass="active" >{{data.name}}</router-link>
     <!-- <p>{{shi()}}</p> -->
 
   </div>
@@ -34,27 +11,98 @@
 
 </template>
 <script>
+// import Axios from 'axios'
 export default {
   data () {
     return {
-      topLeftList: [
+      topLeftList: {
+        free: [// 免费
+          { name: '热门', pinyin: 'all' }, { name: '有声书', pinyin: 'youshengshu' }, { name: '相声评书', pinyin: 'xiangsheng' },
+          { name: '儿童', pinyin: 'ertong' }, { name: '人文', pinyin: 'renwen' }, { name: '历史', pinyin: 'lishi' }, { name: '音乐', pinyin: 'yinyue' },
+          { name: '教育培训', pinyin: 'jiaoyu' }, { name: '外语', pinyin: 'waiyu' }, { name: '娱乐', pinyin: 'yule' }, { name: '情感生活', pinyin: 'qinggan' },
+          { name: '商业财经', pinyin: 'shangye' }, { name: '头条', pinyin: 'toutiao' }, { name: '健康养生', pinyin: 'jiankang' }, { name: '广播剧', pinyin: 'guangbo' },
+          { name: '戏曲', pinyin: 'xiqu' }, { name: 'IT科技', pinyin: 'keji' }, { name: '旅游', pinyin: 'lvyou' }, { name: '影视', pinyin: 'yingshi' },
+          { name: '时尚生活', pinyin: 'shishang' }, { name: '汽车', pinyin: 'qiche' }, { name: '二次元', pinyin: 'erciyuan' }, { name: '电台', pinyin: 'diantai' }
+        ],
+        rise: [// 飙升
+          { name: '总榜', pinyin: 'all' }, { name: '新品', pinyin: 'all1' }, { name: '有声书', pinyin: 'youshengshu' }, { name: '相声评书', pinyin: 'xiangsheng' },
+          { name: '儿童', pinyin: 'ertong' }, { name: '人文', pinyin: 'renwen' }, { name: '历史', pinyin: 'lishi' }, { name: '音乐', pinyin: 'yinyue' },
+          { name: '教育培训', pinyin: 'jiaoyu' }, { name: '外语', pinyin: 'waiyu' }, { name: '娱乐', pinyin: 'yule' }, { name: '情感生活', pinyin: 'qinggan' },
+          { name: '商业财经', pinyin: 'shangye' }, { name: '头条', pinyin: 'toutiao' }, { name: '健康养生', pinyin: 'jiankang' }, { name: '广播剧', pinyin: 'guangbo' },
+          { name: '戏曲', pinyin: 'xiqu' }, { name: 'IT科技', pinyin: 'keji' }, { name: '旅游', pinyin: 'lvyou' }, { name: '影视', pinyin: 'yingshi' },
+          { name: '时尚生活', pinyin: 'shishang' }, { name: '汽车', pinyin: 'qiche' }, { name: '二次元', pinyin: 'erciyuan' }, { name: '电台', pinyin: 'diantai' }
+        ],
+        paid: [// 付费
+          { name: '热门', pinyin: 'all' }, { name: '新品', pinyin: 'all1' }, { name: 'VIP', pinyin: 'all2' }, { name: '飙升', pinyin: 'all3' }, { name: '有声书', pinyin: 'youshengshu' },
+          { name: '人文', pinyin: 'renwen' }, { name: '教育培训', pinyin: 'jiaoyu' }, { name: '商业财经', pinyin: 'shangye' }, { name: '历史', pinyin: 'lishi' },
+          { name: '外语', pinyin: 'waiyu' }, { name: '儿童', pinyin: 'ertong' }, { name: '相声评书', pinyin: 'xiangsheng' }, { name: '艺术', pinyin: 'yishu' }
+        ],
+        subscribe: [// 订阅
+          { name: '热门', pinyin: 'all' }, { name: '有声书', pinyin: 'youshengshu' }, { name: '相声评书', pinyin: 'xiangsheng' },
+          { name: '儿童', pinyin: 'ertong' }, { name: '人文', pinyin: 'renwen' }, { name: '历史', pinyin: 'lishi' }, { name: '音乐', pinyin: 'yinyue' },
+          { name: '教育培训', pinyin: 'jiaoyu' }, { name: '外语', pinyin: 'waiyu' }, { name: '娱乐', pinyin: 'yule' }, { name: '情感生活', pinyin: 'qinggan' },
+          { name: '商业财经', pinyin: 'shangye' }, { name: '头条', pinyin: 'toutiao' }, { name: '健康养生', pinyin: 'jiankang' }, { name: '广播剧', pinyin: 'guangbo' },
+          { name: '戏曲', pinyin: 'xiqu' }, { name: 'IT科技', pinyin: 'keji' }, { name: '旅游', pinyin: 'lvyou' }, { name: '影视', pinyin: 'yingshi' },
+          { name: '时尚生活', pinyin: 'shishang' }, { name: '汽车', pinyin: 'qiche' }, { name: '二次元', pinyin: 'erciyuan' }, { name: '电台', pinyin: 'diantai' }
+        ],
+        reputation: [// 好评
+          { name: '热门', pinyin: 'all' }, { name: '头条', pinyin: 'toutiao' }, { name: '音乐', pinyin: 'yinyue' }, { name: '有声书', pinyin: 'youshengshu' }, { name: '娱乐', pinyin: 'yule' }, { name: '外语', pinyin: 'waiyu' },
+          { name: '儿童', pinyin: 'ertong' }, { name: '健康养生', pinyin: 'jiankang' }, { name: '商业财经', pinyin: 'shangye' }, { name: '历史', pinyin: 'lishi' },
+          { name: '情感生活', pinyin: 'qinggan' }, { name: '相声评书', pinyin: 'xiangsheng' }, { name: '教育培训', pinyin: 'jiaoyu' },
+          { name: '广播剧', pinyin: 'guangbo' },
+          { name: '戏曲', pinyin: 'xiqu' }, { name: '电台', pinyin: 'diantai' }, { name: 'IT科技', pinyin: 'keji' }, { name: '汽车', pinyin: 'qiche' }, { name: '旅游', pinyin: 'lvyou' }, { name: '影视', pinyin: 'yingshi' },
+          { name: '二次元', pinyin: 'erciyuan' }, { name: '时尚生活', pinyin: 'shishang' }, { name: '人文', pinyin: 'renwen' }
+        ]
+      },
+      // topLeftList: [],
+      topRightList: [],
+      touzhi: this.top,
+      list: [
         { name: '热门', pinyin: 'all' }, { name: '有声书', pinyin: 'youshengshu' }, { name: '相声评书', pinyin: 'xiangsheng' },
         { name: '儿童', pinyin: 'ertong' }, { name: '人文', pinyin: 'renwen' }, { name: '历史', pinyin: 'lishi' }, { name: '音乐', pinyin: 'yinyue' },
         { name: '教育培训', pinyin: 'jiaoyu' }, { name: '外语', pinyin: 'waiyu' }, { name: '娱乐', pinyin: 'yule' }, { name: '情感生活', pinyin: 'qinggan' },
         { name: '商业财经', pinyin: 'shangye' }, { name: '头条', pinyin: 'toutiao' }, { name: '健康养生', pinyin: 'jiankang' }, { name: '广播剧', pinyin: 'guangbo' },
         { name: '戏曲', pinyin: 'xiqu' }, { name: 'IT科技', pinyin: 'keji' }, { name: '旅游', pinyin: 'lvyou' }, { name: '影视', pinyin: 'yingshi' },
         { name: '时尚生活', pinyin: 'shishang' }, { name: '汽车', pinyin: 'qiche' }, { name: '二次元', pinyin: 'erciyuan' }, { name: '电台', pinyin: 'diantai' }
-      ],
-      topRightList: []
+      ]
     }
   },
   props: [
     'top'
   ],
+  // mounted () {
+  //   Axios({
+  //     url: '/revision/rank/v2/cluster'
+  //     // http://m.ximalaya.com/revision/rank/v2/cluster
+  //     // https://www.ximalaya.com/revision/rank/v2/cluster
+  //   }).then((res) => {
+  //     // console.log(res.data.data.clusterType)
+  //     this.topLeftList=res.data.data.clusterType
+  //     console.log(this.topLeftList)
+  //   })
+  // },
+  watch: {
+    // $route(to , from ){
+    //   // console.log('慌了')
+
+    //   this.huantou()
+    // }
+  },
   methods: {
-    shi () {
-      console.log(this.top)
-    }
+    // shi () {
+    //   console.log(this.top)
+    // }
+    // 换头时触发
+    // huantou(){
+    //   if(this.top!=this.touzhi){
+    //     // console.log(1)
+
+    //     this.list=
+
+    //     this.touzhi=this.top;
+
+    //   }
+    // }
   }
 }
 </script>

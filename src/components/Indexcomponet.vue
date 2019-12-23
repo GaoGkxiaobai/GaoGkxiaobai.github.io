@@ -1,6 +1,6 @@
 <template>
   <div>
-    <headnav></headnav>
+    <headnav :class="isflex?'flex':''" :isflex='ish'></headnav>
     <swiper
       v-if="$store.state.indexData.focusImages"
       :path="{
@@ -24,20 +24,24 @@
       </li>
     </ul>
 
-    <ul  v-for="(data,i) in $store.state.indexData.moduleRankDatas" :key="i" class='indexul'>
+    <ul
+      v-for="(data,i) in $store.state.indexData.moduleRankDatas"
+      :key="i"
+      :class="boolean?'indexul':'ful'"
+    >
       <h3>
-        {{boorlen?(data.title):(data.moduleInfo.displayName)}}
+        {{boolean?(data.title):(data.moduleInfo.displayName)}}
         <router-link v-if="data.moreLink" tag="span" :to="data.moreLink | movefilter">更多></router-link>
       </h3>
       <li
-        v-for="item in boorlen?(data.rankingContentInfoList.rankModuleInfoList):(data.albumBriefDetailInfos)"
+        v-for="item in boolean?(data.rankingContentInfoList.rankModuleInfoList):(data.albumBriefDetailInfos)"
         :key="item.id"
         @click="indexclick(item.id)"
       >
         <img :src="'http://imagev2.xmcdn.com/'+item.albumInfo.cover" alt />
         <div>
           <h3>{{item.albumInfo.title}}</h3>
-          <p>{{boorlen?(item.albumInfo.customTitle):(item.albumInfo.subTitle  )}}</p>
+          <p>{{boolean?(item.albumInfo.customTitle):(item.albumInfo.subTitle )}}</p>
           <p>
             <span>
               <i class="iconfont icon-shengyin"></i>
@@ -51,7 +55,6 @@
         </div>
       </li>
     </ul>
-
   </div>
 </template>
 <script>
@@ -113,7 +116,7 @@ Vue.filter('listenfilter', list => {
 export default {
   data () {
     return {
-      b: true
+      isflex: false
     }
   },
   components: {
@@ -123,22 +126,42 @@ export default {
   created () {
     this.$store.dispatch('getindexdata', this.$route.name)
   },
+  mounted () {
+    window.onscroll = this.myscroll
+  },
+  beforeDestroy () {
+    window.onscroll = null
+  },
   props: ['boolean'],
   methods: {
     indexclick (id) {
       console.log(id)
       this.$router.push(`/detail/${id}`)
+    },
+    myscroll () {
+      if (
+        (document.documentElement.scrollTop + 10 || document.body.scrollTop + 10) >=
+        this.$store.state.topH
+      ) {
+        // 判断滚动距离
+        // document.documentElement.scrollTop  页面滚动距离
+        // document.body.scrollTop  页面滚动距离兼容写法
+        this.isflex = true
+        this.he = document.documentElement.scrollTop + 10 || document.body.scrollTop + 10
+      } else {
+        this.isflex = false
+      }
     }
   }
 }
 </script>
 
 <style lang="scss" scoped>
-.swiper-slide{
-  img{
-  height: 1.39rem;
-  width: 3.23rem;
-  overflow: auto;
+.swiper-slide {
+  img {
+    height: 1.39rem;
+    width: 3.23rem;
+    overflow: auto;
   }
 }
 div {
@@ -150,7 +173,7 @@ div {
     position: relative;
     left: 50%;
     transform: translateX(-50%);
-    margin-top: 0.2rem;
+    margin-top: 0.1rem;
     li {
       float: left;
       margin: 0.1rem;
@@ -225,5 +248,90 @@ div {
     }
   }
 
+  ul.ful {
+    width: 100%;
+    overflow: hidden;
+    margin: 0.17rem 0 0.17rem 0.15rem;
+    h3 {
+      width: 100%;
+      height: 0.24rem;
+      font: 0.18rem/0.24rem "宋体";
+      color: #333333;
+      font-weight: bold;
+      margin: 0 0 0.17rem 0;
+    }
+    li {
+      float: left;
+      width: 1.22rem;
+      height: 1.75rem;
+      overflow: hidden;
+      margin: 0 0.03rem;
+      img {
+        width: 1.22rem;
+        height: 1.22rem;
+        display: block;
+      }
+      div {
+        h3 {
+          margin: 0;
+          font: 0.13rem/0.13rem "宋体";
+          color: #333333;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          margin: 0.06rem 0 0.11rem 0;
+        }
+        p {
+          display: none;
+        }
+        span {
+          display: none;
+        }
+      }
+    }
+    li:nth-child(4) ~ li {
+      width: 100%;
+      height: auto;
+      overflow: hidden;
+      padding: 0.15rem 0.1rem 0.15rem 0;
+      border-bottom: 1px solid #ccc;
+      img {
+        width: 0.7rem;
+        height: 0.7rem;
+        float: left;
+        margin-right: 0.2rem;
+      }
+      div {
+        float: left;
+        width: 2.89rem;
+        h3 {
+          font: 0.16rem/0.16rem "宋体";
+          color: #333333;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          margin: 0;
+        }
+        p {
+          display: block;
+          font: 0.13rem/0.13rem "宋体";
+          color: #999999;
+          margin: 0.05rem 0 0.07rem;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+        span {
+          display: inline-block;
+          font: 0.13rem/0.13rem "宋体";
+          color: #999999;
+          margin-right: 0.2rem;
+        }
+      }
+    }
+    li:last-child {
+      border-bottom: none;
+    }
+  }
 }
 </style>
