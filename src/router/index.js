@@ -11,7 +11,7 @@ import Emotion from '@/views/index/Emotion'
 import History from '@/views/index/History'
 import Science from '@/views/index/Science'
 import More from '@/views/index/More'
-import topRight from '@/components/topRight'
+import topRight from '@/views/top/topRight'
 Vue.use(VueRouter)
 
 const routes = [
@@ -102,6 +102,21 @@ const routes = [
       {
         path: '/top',
         redirect: '/top/free/all'
+      }
+    ]
+  },
+  {
+    path: '/ting', // 听单
+    component: () => import('@/views/listeningList'),
+    children: [
+      {
+        path: '/ting/:tou',
+        component: () => import('@/views/listeninglist/listeningListxia'), // 免费榜
+        props: true
+      },
+      {
+        path: '/ting',
+        redirect: '/ting/remen'
       }
     ]
   },
