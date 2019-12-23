@@ -22,7 +22,7 @@ export default {
   },
   mounted () {
     Axios({
-      url: `https://m.ximalaya.com/m-revision/page/rank/queryRank?clusterCode=${this.top}&categoryCode=${left}`
+      url: `https://m.ximalaya.com/m-revision/page/rank/queryRank?clusterCode=${this.top}&categoryCode=${this.left}`
     }).then((res) => {
       console.log(res)
     })
