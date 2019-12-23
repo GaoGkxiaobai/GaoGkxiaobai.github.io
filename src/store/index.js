@@ -35,7 +35,7 @@ export default new Vuex.Store({
         url: 'https://m.ximalaya.com/m-revision/page/index/queryIndexTabModule',
         method: 'get'
       }).then(res => {
-        store.commit(GET_HEADNAV_DATA, res.data.data.moduleRankDatas)
+        store.commit(GET_HEADNAV_DATA, res.data.data)
       })
     },
     getindexdata (store) {
