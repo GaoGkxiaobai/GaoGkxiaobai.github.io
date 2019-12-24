@@ -4,7 +4,8 @@
         {{this.left}}
         {{shishi()}}
     </div> -->
-    <ul class="toprightul clear">
+    <!-- <div class="waicheng"> -->
+      <ul class="toprightul clear ggk1">
         <li class="toprightli clear" v-for="(data,index) in list" :key="data.id">
           <span class="iconfont toprightliic color1 spancolor" v-if="index==0">
             &#xe630;
@@ -18,21 +19,76 @@
           <span class="iconfont toprightliic" v-else>
             {{index+1}}
           </span>
-          <img class="toprightliimg" :src="'https://imagev2.xmcdn.com/'+data.albumInfo.cover" alt="">
+          <img class="toprightliimg" v-lazy="'https://imagev2.xmcdn.com/'+data.albumInfo.cover" :alt="data.albumInfo.title">
           <div class="toprightliright" >
             <!-- <img class="toprightliimg" :src="'https://imagev2.xmcdn.com/'+data.albumInfo.cover" alt=""> -->
             <h2>{{data.albumInfo.title}}</h2>
             <p>{{(data.albumInfo.customTitle)?data.albumInfo.customTitle:data.albumInfo.recommendReason}}</p>
             <span class="iconfont ">&#xe63a;</span>
-            <span class="toprightlirightbofang">{{data.statCountInfo.playCount}}</span>
+            <span class="toprightlirightbofang">{{data.statCountInfo.playCount | filter}}</span>
             <span class="iconfont ">&#xe87c;</span>
             <span>{{data.statCountInfo.trackCount}}</span>
           </div>
         </li>
     </ul>
+    <!-- </div> -->
+
 </template>
 <script>
 import Axios from 'axios'
+import { Indicator } from 'mint-ui'
+// import BScroll from 'better-scroll'
+import Vue from 'vue'
+
+// 数字格式
+Vue.filter('filter', list => {
+  function transform (value) {
+    let newValue = ['', '', '']
+    let fr = 1000
+    let num = 3
+    while (value / fr >= 1) {
+      fr *= 10
+      num += 1
+    }
+    if (num <= 4) {
+      // 千
+      newValue[1] = '千'
+      newValue[0] = parseInt(value / 1000) + ''
+    } else if (num <= 8) {
+      // 万
+      const text1 = parseInt(num - 4) / 3 > 1 ? '千万' : '万'
+      // tslint:disable-next-line:no-shadowed-variable
+      const fm = text1 === '万' ? 10000 : 10000000
+      newValue[1] = text1
+      newValue[0] = value / fm + ''
+    } else if (num <= 16) {
+      // 亿
+      let text1 = (num - 8) / 3 > 1 ? '千亿' : '亿'
+      text1 = (num - 8) / 4 > 1 ? '万亿' : text1
+      text1 = (num - 8) / 7 > 1 ? '千万亿' : text1
+      // tslint:disable-next-line:no-shadowed-variable
+      let fm = 1
+      if (text1 === '亿') {
+        fm = 100000000
+      } else if (text1 === '千亿') {
+        fm = 100000000000
+      } else if (text1 === '万亿') {
+        fm = 1000000000000
+      } else if (text1 === '千万亿') {
+        fm = 1000000000000000
+      }
+      newValue[1] = text1
+      newValue[0] = parseInt(value / fm) + ''
+    }
+    if (value < 1000) {
+      newValue[1] = ''
+      newValue[0] = value + ''
+    }
+    return newValue.join('')
+  }
+  return transform(+list)
+})
+
 export default {
   data () {
     return {
@@ -48,22 +104,52 @@ export default {
   props: ['top', 'left'],
   methods: {
     rightlist () {
+      Indicator.open({
+        text: '加载中...',
+        spinnerType: 'fading-circle'
+      })
       Axios({
         url: `https://m.ximalaya.com/m-revision/page/rank/queryRank?clusterCode=${this.top}&categoryCode=${this.left}`
       }).then((res) => {
         // console.log(res.data.data.rankModuleInfoList)
+        Indicator.close()
         this.list = res.data.data.rankModuleInfoList
       })
+      document.documentElement.scrollTop = 0
+      document.body.scrollTop = 0
+    //   this.$nextTick(() => {
+    // // console.log(1)
+    //   new BScroll('.ggk1', {
+    //     scrollbar: {
+    //       fade: true,
+    //       interactive: false // 1.8.0 新增
+    //     }
+    //   })
+    // })
     }
   },
   mounted () {
   // updated(){
+    Indicator.open({
+      text: '加载中...',
+      spinnerType: 'fading-circle'
+    })
     Axios({
       url: `https://m.ximalaya.com/m-revision/page/rank/queryRank?clusterCode=${this.top}&categoryCode=${this.left}`
     }).then((res) => {
       // console.log(res.data.data.rankModuleInfoList)
+      Indicator.close()
       this.list = res.data.data.rankModuleInfoList
     })
+    // this.$nextTick(() => {
+    // // console.log(1)
+    //   new BScroll('.ggk1', {
+    //     scrollbar: {
+    //       fade: true,
+    //       interactive: false // 1.8.0 新增
+    //     }
+    //   })
+    // })
   }
   // beforeUpdate() {
   //   // console.log(1)
@@ -87,9 +173,15 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-.toprightul{
-    width: 100%;
+// .waicheng{
+//   width: 100%;
+//   height: 100%;
+//   overflow: hidden;
+  .toprightul{
+    // width:calc(100% + 17px);
+    // height:calc(100% + 17px);
     font-size: 0.2rem;
+    // overflow: auto;
     .toprightli{
       width: 100%;
       padding: 0.15rem 0.1rem 0.15rem 0;
@@ -163,4 +255,6 @@ export default {
 .color3{
   color: orange;
 }
+// }
+
 </style>

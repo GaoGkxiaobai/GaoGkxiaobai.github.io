@@ -7,7 +7,7 @@
         infinite-scroll-distance="10"
         >
           <li v-for="data in tingdanlist" :key="data.id" class="listenlinglistli" >
-            <img :src="'http:'+data.coverPathSmall" :alt="data.intro">
+            <img v-lazy="'http:'+data.coverPathSmall" :alt="data.intro">
             <div class="listenlinglistliright">
                 <h3>{{data.title}}</h3>
                 <p>
@@ -31,9 +31,7 @@ Vue.filter('filter', list => {
   function transform (value) {
     let newValue = ['', '', '']
     let fr = 1000
-    // const ad = 1
     let num = 3
-    // const fm = 1
     while (value / fr >= 1) {
       fr *= 10
       num += 1
@@ -151,6 +149,12 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
+image[lazy=loading] {
+  width: 0.7rem;
+  height: 0.7rem;
+  margin: 0.15rem 0;
+  float: left;
+}
     .listenlinglist{
         font-size: 0.2rem;
         // overflow: hidden;

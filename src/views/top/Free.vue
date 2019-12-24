@@ -1,18 +1,22 @@
 <template>
-<div class="box">
-  <div class="paihangLeft">
+<div class="waichenga">
+  <div class="box">
+    <div class="paihangLeft">
 
-    <router-link v-for="data in topLeftList[this.top]"  :key="data.pinyin" :to="'/top/'+top+'/'+data.pinyin"  class="paihangLeft_p" tag="p" activeClass="active" >{{data.name}}</router-link>
-    <!-- <p>{{shi()}}</p> -->
+      <router-link v-for="data in topLeftList[this.top]"  :key="data.pinyin" :to="'/top/'+top+'/'+data.pinyin"  class="paihangLeft_p" tag="p" activeClass="active" >{{data.name}}</router-link>
+      <!-- <p>{{shi()}}</p> -->
 
+    </div>
+    <router-view class="r"></router-view>
   </div>
-  <router-view class="r"></router-view>
 </div>
 
 </template>
 <script>
 // import Axios from 'axios'
+// import BScroll from 'better-scroll'
 export default {
+
   data () {
     return {
       topLeftList: {
@@ -70,6 +74,14 @@ export default {
   props: [
     'top'
   ],
+  mounted () {
+    // new BScroll('.ggk', {
+    //   scrollbar: {
+    //     fade: true,
+    //     interactive: false // 1.8.0 新增
+    //   }
+    // })
+  },
   // mounted () {
   //   Axios({
   //     url: '/revision/rank/v2/cluster'
@@ -108,60 +120,68 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.box{
-  position: relative;
-}
-.paihangLeft{
+.waichenga{
   width: 100%;
+  height: 100%;
   overflow: hidden;
-  position: relative;
-  .paihangLeft_p{
+  .box{
     position: relative;
-    width: 0.73rem;
-    background: #fff;
-    display: block;
-    height: 0.5rem;
-    line-height: 0.5rem;
-    -webkit-box-sizing: border-box;
-    box-sizing: border-box;
-    text-align: center;
-    font-size: 0.14rem;
-    color: #72727b;
-    font-family: PingFangSC-Regular;
+    width:calc(100% + 17px);
+    height:calc(100% + 17px);
+    overflow: auto;
+  }
+  .paihangLeft{
+    width: 100%;
+    overflow: hidden;
     position: relative;
-    background-color: rgba(0, 0, 0, .2);
-    &::after{
+    .paihangLeft_p{
+      position: relative;
+      width: 0.73rem;
+      background-color: #eff1f4;
+      display: block;
+      height: 0.5rem;
+      line-height: 0.5rem;
+      -webkit-box-sizing: border-box;
+      box-sizing: border-box;
+      text-align: center;
+      font-size: 0.14rem;
+      color: #72727b;
+      font-family: PingFangSC-Regular;
+      position: relative;
+      // background-color: rgba(0, 0, 0, .2);
+      &::after{
+        content: '';
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        border-bottom: 1px solid #aaaaaa;
+        transform: scaleY(.5);
+        transform-origin: 50% 100%;
+      }
+  }
+  .active{
+    background-color: white;
+    &::before{
       content: '';
       position: absolute;
       left: 0;
-      right: 0;
+      top: 0;
       bottom: 0;
-      border-bottom: 1px solid #aaaaaa;
-      transform: scaleY(.5);
-      transform-origin: 50% 100%;
+      width: 0.05rem;
+      height: 0.5rem;
+      background-color: #f86442;
     }
-}
-.active{
-  background-color: white;
-  &::before{
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 0;
-    bottom: 0;
-    width: 0.05rem;
-    height: 0.5rem;
-    background-color: #f86442;
   }
-}
 
-}
-.r{
-  position: absolute;
-  top:0;
-  left: 0.73rem;
-  width: 3.37rem;
-  overflow: hidden;
+  }
+  .r{
+    position: absolute;
+    top:0;
+    left: 0.73rem;
+    width: 3.37rem;
+    overflow: hidden;
+  }
 }
 
 </style>
