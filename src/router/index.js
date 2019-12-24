@@ -109,6 +109,7 @@ const routes = [
   {
     path: '/ting', // 听单
     component: () => import('@/views/listeningList'),
+    name: 'tingdan',
     children: [
       {
         path: '/ting/:tou',
