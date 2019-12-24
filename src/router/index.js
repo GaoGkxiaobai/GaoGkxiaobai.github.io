@@ -123,6 +123,21 @@ const routes = [
     ]
   },
   {
+    path: '/search', // 搜索
+    component: () => import('@/views/Search'),
+    children: [
+      {
+        path: '/search/:search',
+        component: () => import('@/views/search/SearchAll'),
+        props: true
+      },
+      {
+        path: '/search',
+        redirect: '/search/-1'
+      }
+    ]
+  },
+  {
     path: '/detail/:myid/:aid',
     name: 'detail',
     props: true,

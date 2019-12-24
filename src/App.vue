@@ -2,7 +2,7 @@
   <div>
     <div class="top" ref="mytop">
      <img src="img/喜马拉雅.png" alt="">
-     <input type="text" placeholder="搜索">
+     <input type="text" placeholder="搜索" @click="search">
     </div>
 
     <router-view></router-view>
@@ -13,8 +13,12 @@
 
 export default {
   mounted () {
-    console.log(this.$refs.mytop.offsetHeight)
     this.$store.dispatch('gettopheight', this.$refs.mytop.offsetHeight)
+  },
+  methods: {
+    search () {
+      this.$router.push('/search')
+    }
   }
 }
 </script>

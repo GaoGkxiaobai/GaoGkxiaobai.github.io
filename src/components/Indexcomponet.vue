@@ -14,42 +14,70 @@
         v-for="item in $store.state.indexData.focusImages"
         :key="item.adFocusPictureDetail.adId"
       >
-        <img :src="item.adFocusPictureDetail.cover" alt />
+        <img v-lazy="item.adFocusPictureDetail.cover" alt />
       </div>
     </swiper>
     <ul class="navul">
       <li v-for="data in $store.state.indexData.tomatoes" :key="data.order">
-        <img :src="data.img" alt />
+        <img v-lazy="data.img" alt />
         <p>{{data.name}}</p>
       </li>
     </ul>
-
-    <ul
-      v-for="(data,i) in $store.state.indexData.moduleRankDatas"
-      :key="i"
-      :class="boolean?'indexul':'ful'"
-    >
-      <h3>
-        {{boolean?(data.title):(data.moduleInfo.displayName)}}
-        <router-link v-if="data.moreLink" tag="span" :to="data.moreLink | movefilter">更多></router-link>
-      </h3>
-      <li
-        v-for="item in boolean?(data.rankingContentInfoList.rankModuleInfoList):(data.albumBriefDetailInfos)"
-        :key="item.id"
-        @click="indexclick(item.id,item.anchorInfo.id)"
+    <div>
+      <ul
+        v-for="(data,i) in $store.state.indexData.moduleRankDatas"
+        :key="i"
+        :class="boolean?'indexul':'ful'"
       >
-        <img :src="'http://imagev2.xmcdn.com/'+item.albumInfo.cover" alt />
+        <h3>
+          {{(boolean?(data.title):(data.moduleInfo.displayName))}}
+          <router-link v-if="data.moreLink" tag="span" :to="data.moreLink | movefilter">更多></router-link>
+        </h3>
+        <li
+          v-for="item in (boolean?(data.rankingContentInfoList.rankModuleInfoList):(data.albumBriefDetailInfos))"
+          :key="item.id"
+          @click="indexclick(item.id,item.anchorInfo.id)"
+        >
+          <img v-lazy="'http://imagev2.xmcdn.com/'+item.albumInfo.cover" alt />
+          <div>
+            <h3>{{item.albumInfo.title}}</h3>
+            <p>{{boolean?(item.albumInfo.customTitle):(item.albumInfo.subTitle )}}</p>
+            <p>
+              <span>
+                <i class="iconfont icon-shengyin"></i>
+                {{item.statCountInfo.trackCount}}
+              </span>
+              <span>
+                <i class="iconfont icon-erji"></i>
+                {{item.statCountInfo.playCount |listenfilter}}
+              </span>
+            </p>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <ul
+      v-infinite-scroll="loadMore"
+      infinite-scroll-disabled="loading"
+      infinite-scroll-distance="20"
+      infinite-scroll-immediate-check="false"
+      class="moveul"
+      v-if="$store.state.moveData"
+    >
+      <h3>更多推荐</h3>
+      <li v-for="data in $store.state.moveData" :key="data.data.id">
+        <img v-lazy="'http://imagev2.xmcdn.com/'+data.data.albumInfo.cover" alt />
         <div>
-          <h3>{{item.albumInfo.title}}</h3>
-          <p>{{boolean?(item.albumInfo.customTitle):(item.albumInfo.subTitle )}}</p>
+          <h3>{{data.data.albumInfo.title}}</h3>
+          <p>{{data.data.albumInfo.customTitle}}</p>
           <p>
             <span>
               <i class="iconfont icon-shengyin"></i>
-              {{item.statCountInfo.trackCount}}
+              {{data.data.statCountInfo.trackCount}}
             </span>
             <span>
               <i class="iconfont icon-erji"></i>
-              {{item.statCountInfo.playCount |listenfilter}}
+              {{data.data.statCountInfo.playCount |listenfilter}}
             </span>
           </p>
         </div>
@@ -60,6 +88,7 @@
 <script>
 import headnav from '@/components/Headnav'
 import swiper from '@/components/Swiper'
+import { Indicator, InfiniteScroll, Lazyload } from 'mint-ui'
 import Vue from 'vue'
 Vue.filter('movefilter', list => {
   return list.replace(/\d+/, '')
@@ -116,12 +145,19 @@ Vue.filter('listenfilter', list => {
 export default {
   data () {
     return {
-      isflex: false
+      isflex: false,
+      loading: false
     }
   },
   components: {
     headnav,
     swiper
+  },
+  beforeCreate () {
+    Indicator.open({
+      text: '加载中...',
+      spinnerType: 'fading-circle'
+    })
   },
   created () {
     this.$store.dispatch('getindexdata', this.$route.name)
@@ -131,6 +167,10 @@ export default {
   },
   beforeDestroy () {
     window.onscroll = null
+    this.$store.state.indexData = []
+    document.documentElement.scrollTop = 0
+    document.body.scrollTop = 0
+    this.$store.state.moveData = ''
   },
   props: ['boolean'],
   methods: {
@@ -140,23 +180,36 @@ export default {
     },
     myscroll () {
       if (
-        (document.documentElement.scrollTop + 10 || document.body.scrollTop + 10) >=
-        this.$store.state.topH
+        (document.documentElement.scrollTop + 10 ||
+          document.body.scrollTop + 10) >= this.$store.state.topH
       ) {
         // 判断滚动距离
         // document.documentElement.scrollTop  页面滚动距离
         // document.body.scrollTop  页面滚动距离兼容写法
         this.isflex = true
-        this.he = document.documentElement.scrollTop + 10 || document.body.scrollTop + 10
+        this.he =
+          document.documentElement.scrollTop + 10 ||
+          document.body.scrollTop + 10
       } else {
         this.isflex = false
       }
+    },
+    loadMore () {
+      this.loading = true
+      console.log(this.loading, 1223)
+      this.$store.dispatch('getMove', this.$route.name)
+      this.loading = false
     }
   }
 }
 </script>
 
 <style lang="scss" scoped>
+image[lazy="loading"] {
+  width: 40px;
+  height: 300px;
+  margin: auto;
+}
 .swiper-slide {
   img {
     height: 1.39rem;
@@ -188,7 +241,8 @@ div {
       }
     }
   }
-  ul.indexul {
+  ul.indexul,
+  .moveul {
     width: 100%;
     padding: 0.15rem;
     h3 {

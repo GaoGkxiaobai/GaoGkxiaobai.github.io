@@ -1,3 +1,7 @@
 export const GET_HEADNAV_DATA = 'get_headnav_data'
 export const GET_INDEX_DATA = 'get_index_data'
 export const GET_HEIGHT_DATA = 'get_height_data'
+export const GET_MOVE_DATA = 'get_move_data'
+export const GET_SEARCH_DATA = 'get_search_data'
+export const GET_ALLSEARCH_DATA = 'get_allsearch_data'
+export const GET_SEARCHLIST_DATA = 'get_searchlist_data'

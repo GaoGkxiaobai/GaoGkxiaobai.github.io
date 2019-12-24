@@ -1,23 +1,21 @@
 <template>
   <ul ref="ul" class="hammerul">
     <router-link
-      v-for="data in $store.state.headData"
-      :to="data.moduleKey"
+      v-for="data in $store.state.searchData"
+      :to="'/search/'+data.categoryId"
       tag="li"
-      :key="data.order"
+      :key="data.categoryId"
       activeClass="active"
-      :class="isflex?'flex':'lf'"
-    >{{data.moduleName}}</router-link>
+    >{{data.categoryName}}</router-link>
   </ul>
 
 </template>
 <script>
 import Hammer from 'hammerjs'
 export default {
-  props: ['isflex'],
   created () {
-    if (this.$store.state.headData.length === 0) {
-      this.$store.dispatch('getheadnav', this.$route.name)
+    if (this.$store.state.searchData.length === 0) {
+      this.$store.dispatch('getsearchdata')
     }
   },
   mounted () {
@@ -40,9 +38,6 @@ export default {
       }
       ul.style.left = left + 150 + 'px'
     })
-  },
-
-  methods: {
   }
 }
 </script>
@@ -64,7 +59,6 @@ ul {
     color: #72727b;
     text-align: center;
     padding-bottom: 0.13rem;
-
   }
 }
 .active {
@@ -76,12 +70,5 @@ ul {
 }
 ul {
   border-bottom: 0.01rem solid #e8e8ee;
-}
-.flex {
-  width: 150%;
-  position: fixed;
-  top: 0;
-  background: white;
-  z-index: 200;
 }
 </style>
