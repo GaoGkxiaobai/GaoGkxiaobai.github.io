@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="listbox">
         <listeningListTou></listeningListTou>
         <router-view></router-view>
     </div>
@@ -12,3 +12,8 @@ export default {
   }
 }
 </script>
+<style lang="scss" scoped>
+.listbox{
+  margin-top: 0.5rem;
+}
+</style>

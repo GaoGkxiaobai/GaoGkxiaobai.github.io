@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="topbox">
         <topTou></topTou>
 
         <router-view></router-view>
@@ -14,3 +14,8 @@ export default {
   }
 }
 </script>
+<style lang="scss" scoped>
+.topbox{
+  margin-top: 0.5rem;
+}
+</style>
