@@ -107,7 +107,6 @@ const routes = [
     ]
   },
   {
-<<<<<<< HEAD
     path: '/ting', // 听单
     component: () => import('@/views/listeningList'),
     children: [
@@ -123,11 +122,23 @@ const routes = [
     ]
   },
   {
-    path: '/detail/:myid',
-=======
+    path: '/search', // 搜索
+    component: () => import('@/views/Search'),
+    children: [
+      {
+        path: '/search/:search',
+        component: () => import('@/views/search/SearchAll'),
+        props: true
+      },
+      {
+        path: '/search',
+        redirect: '/search/-1'
+      }
+    ]
+  },
+  {
     path: '/detail/:myid/:aid',
     name: 'detail',
->>>>>>> 1d0aaa15fa2b4cbef6d78b9f08d38c6e99cac0b7
     props: true,
     component: () => import('@/views/Detail.vue') // 详情
   },
