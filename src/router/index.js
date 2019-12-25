@@ -144,7 +144,7 @@ const routes = [
     component: () => import('@/views/Detail.vue') // 详情
   },
   {
-    path: '/categoryall',
+    path: '/category',
     props: true,
     component: () => import('@/views/Categoryall.vue') // 全部分类
   },

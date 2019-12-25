@@ -1,10 +1,5 @@
 <template>
-    <!-- <div>
-        {{this.top}}
-        {{this.left}}
-        {{shishi()}}
-    </div> -->
-    <!-- <div class="waicheng"> -->
+    <div class="waicheng">
       <ul class="toprightul clear ggk1">
         <li class="toprightli clear" v-for="(data,index) in list" :key="data.id">
           <span class="iconfont toprightliic color1 spancolor" v-if="index==0">
@@ -25,13 +20,13 @@
             <h2>{{data.albumInfo.title}}</h2>
             <p>{{(data.albumInfo.customTitle)?data.albumInfo.customTitle:data.albumInfo.recommendReason}}</p>
             <span class="iconfont ">&#xe63a;</span>
-            <span class="toprightlirightbofang">{{data.statCountInfo.playCount | filter}}</span>
+            <span class="toprightlirightbofang">{{(data.statCountInfo.playCount||data.statCountInfo.subscribeCount) | filter}}</span>
             <span class="iconfont ">&#xe87c;</span>
             <span>{{data.statCountInfo.trackCount}}</span>
           </div>
         </li>
     </ul>
-    <!-- </div> -->
+    </div>
 
 </template>
 <script>
@@ -114,9 +109,9 @@ export default {
         // console.log(res.data.data.rankModuleInfoList)
         Indicator.close()
         this.list = res.data.data.rankModuleInfoList
+        document.documentElement.scrollTop = 0
+        document.body.scrollTop = 0
       })
-      document.documentElement.scrollTop = 0
-      document.body.scrollTop = 0
     //   this.$nextTick(() => {
     // // console.log(1)
     //   new BScroll('.ggk1', {
@@ -140,6 +135,8 @@ export default {
       // console.log(res.data.data.rankModuleInfoList)
       Indicator.close()
       this.list = res.data.data.rankModuleInfoList
+      document.documentElement.scrollTop = 0
+      document.body.scrollTop = 0
     })
     // this.$nextTick(() => {
     // // console.log(1)
@@ -173,18 +170,27 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-// .waicheng{
-//   width: 100%;
-//   height: 100%;
-//   overflow: hidden;
+//   position: absolute;
+  //   top:0;
+  //   left: 0.73rem;
+  //   width: 3.37rem;
+  //   overflow: hidden;
+.waicheng{
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
   .toprightul{
-    // width:calc(100% + 17px);
-    // height:calc(100% + 17px);
+    width:calc(100% + 0.17rem);
+    height:calc(100% + 0.17rem);
     font-size: 0.2rem;
-    // overflow: auto;
+    position: relative;
+    // width: 100%;
+    // height: 100%;
+    overflow: auto;
     .toprightli{
-      width: 100%;
-      padding: 0.15rem 0.1rem 0.15rem 0;
+      // width: 100%;
+      width: calc(100% - 0.27rem);
+      padding: 0.15rem 0.27rem 0.15rem 0;
       border-bottom: 0.01rem solid #ccc;
       .toprightliic{
         float: left;
@@ -255,6 +261,6 @@ export default {
 .color3{
   color: orange;
 }
-// }
+}
 
 </style>

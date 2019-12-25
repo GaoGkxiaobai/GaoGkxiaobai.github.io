@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="top" ref="mytop">
-     <img src="img/喜马拉雅.png" alt="">
+     <img src="img/喜马拉雅.png" alt="" @click="click">
      <input type="text" placeholder="搜索" @click="search">
     </div>
 
@@ -18,6 +18,9 @@ export default {
   methods: {
     search () {
       this.$router.push('/search')
+    },
+    click () {
+      this.$router.push('/index')
     }
   }
 }

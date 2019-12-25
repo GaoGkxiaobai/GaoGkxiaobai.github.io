@@ -4,7 +4,7 @@
     <swiper
       v-if="$store.state.indexData.focusImages"
       :path="{
-      slidesPerView: '3',
+      slidesPerView: '1',
       centeredSlides: true,
       spaceBetween: 30,
       }"
@@ -14,34 +14,31 @@
         v-for="item in $store.state.indexData.focusImages"
         :key="item.adFocusPictureDetail.adId"
       >
-        <img v-lazy="item.adFocusPictureDetail.cover" alt />
+        <img :src="item.adFocusPictureDetail.cover" alt />
       </div>
     </swiper>
+
     <ul class="navul">
-      <li v-for="data in $store.state.indexData.tomatoes" :key="data.order">
+      <router-link tag="li" :to="data.link" v-for="data in $store.state.indexData.tomatoes" :key="data.order">
         <img v-lazy="data.img" alt />
         <p>{{data.name}}</p>
-      </li>
+      </router-link>
     </ul>
     <div>
       <ul
         v-for="(data,i) in $store.state.indexData.moduleRankDatas"
         :key="i"
-        :class="boolean?'indexul':'ful'"
+        class="ful"
       >
-        <h3>
-          {{(boolean?(data.title):(data.moduleInfo.displayName))}}
-          <router-link v-if="data.moreLink" tag="span" :to="data.moreLink | movefilter">更多></router-link>
-        </h3>
         <li
-          v-for="item in (boolean?(data.rankingContentInfoList.rankModuleInfoList):(data.albumBriefDetailInfos))"
+          v-for="item in data.albumBriefDetailInfos"
           :key="item.id"
           @click="indexclick(item.id,item.anchorInfo.id)"
         >
           <img v-lazy="'http://imagev2.xmcdn.com/'+item.albumInfo.cover" alt />
           <div>
             <h3>{{item.albumInfo.title}}</h3>
-            <p>{{boolean?(item.albumInfo.customTitle):(item.albumInfo.subTitle )}}</p>
+            <p>{{item.albumInfo.subTitle }}</p>
             <p>
               <span>
                 <i class="iconfont icon-shengyin"></i>
@@ -59,7 +56,7 @@
     <ul
       v-infinite-scroll="loadMore"
       infinite-scroll-disabled="loading"
-      infinite-scroll-distance="20"
+      infinite-scroll-distance="5"
       infinite-scroll-immediate-check="false"
       class="moveul"
       v-if="$store.state.moveData"
@@ -146,12 +143,18 @@ export default {
   data () {
     return {
       isflex: false,
-      loading: false
+      loading: false,
+      nonull: false
     }
   },
   components: {
     headnav,
     swiper
+  },
+  watch: {
+    $route (to, from) {
+      console.log(to.path)
+    }
   },
   beforeCreate () {
     Indicator.open({
@@ -170,7 +173,7 @@ export default {
     this.$store.state.indexData = []
     document.documentElement.scrollTop = 0
     document.body.scrollTop = 0
-    this.$store.state.moveData = ''
+    this.$store.state.moveData = []
   },
   props: ['boolean'],
   methods: {
@@ -196,7 +199,6 @@ export default {
     },
     loadMore () {
       this.loading = true
-      console.log(this.loading, 1223)
       this.$store.dispatch('getMove', this.$route.name)
       this.loading = false
     }
@@ -211,11 +213,21 @@ image[lazy="loading"] {
   margin: auto;
 }
 .swiper-slide {
+  width: 200%;
   img {
     height: 1.39rem;
     width: 3.23rem;
     overflow: auto;
   }
+}
+// .swiper-slide-prev{
+
+// }
+// .swiper-slide-next{
+
+// }
+.swiper-slide-active{
+  left:0.5rem;
 }
 div {
   width: 100%;
@@ -241,7 +253,7 @@ div {
       }
     }
   }
-  ul.indexul,
+
   .moveul {
     width: 100%;
     padding: 0.15rem;
@@ -343,7 +355,7 @@ div {
         }
       }
     }
-    li:nth-child(4) ~ li {
+    li:nth-child(3) ~ li {
       width: 100%;
       height: auto;
       overflow: hidden;

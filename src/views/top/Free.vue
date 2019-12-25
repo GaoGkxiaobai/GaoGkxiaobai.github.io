@@ -1,20 +1,18 @@
 <template>
-<div class="waichenga">
   <div class="box">
-    <div class="paihangLeft">
-
+      <div class="paihangLeft" ref="ul">
       <router-link v-for="data in topLeftList[this.top]"  :key="data.pinyin" :to="'/top/'+top+'/'+data.pinyin"  class="paihangLeft_p" tag="p" activeClass="active" >{{data.name}}</router-link>
-      <!-- <p>{{shi()}}</p> -->
-
     </div>
+
     <router-view class="r"></router-view>
   </div>
-</div>
 
 </template>
 <script>
 // import Axios from 'axios'
 // import BScroll from 'better-scroll'
+import Hammer from 'hammerjs'
+
 export default {
 
   data () {
@@ -75,13 +73,36 @@ export default {
     'top'
   ],
   mounted () {
-    // new BScroll('.ggk', {
-    //   scrollbar: {
-    //     fade: true,
-    //     interactive: false // 1.8.0 新增
-    //   }
-    // })
+    var square = document.querySelector('.' + this.$refs.ul.className)
+    var hammer = new Hammer(square)
+    hammer.on('swipeup', function (e) {
+      console.log(1)
+      // var ul = e.target.parentNode
+      // var top = ul.offsetTop
+      // if (top <= 0) {
+      //   top = 0
+      // }
+      // ul.style.top = top - 150 + 'px'
+    })
+    hammer.on('swipedown', function (e) {
+      console.log(2)
+      // var ul = e.target.parentNode
+      // var top = ul.offsetTop
+      // var width = ul.offsetWidth
+      // if (top > -150) {
+      //   top = -150
+      // }
+      // ul.style.top = top + 150 + 'px'
+    })
   },
+  // mounted () {
+  // new BScroll('.ggk', {
+  //   scrollbar: {
+  //     fade: true,
+  //     interactive: false // 1.8.0 新增
+  //   }
+  // })
+  // },
   // mounted () {
   //   Axios({
   //     url: '/revision/rank/v2/cluster'
@@ -120,19 +141,22 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.waichenga{
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
   .box{
     position: relative;
-    width:calc(100% + 17px);
-    height:calc(100% + 17px);
-    overflow: auto;
+    // width:calc(100% + 17px);
+    // height:calc(100% + 17px);
+    // overflow: auto;
   }
-  .paihangLeft{
+  // .waike{
+  //   width: 100%;
+  //   height: 100%;
+  //   overflow: hidden;
+      .paihangLeft{
     width: 100%;
-    overflow: hidden;
+    height: 100%;
+    // width:calc(100% + 0.17rem);
+    // height:calc(100% + 0.17rem);
+    overflow-y: auto;
     position: relative;
     .paihangLeft_p{
       position: relative;
@@ -175,6 +199,7 @@ export default {
   }
 
   }
+  // }
   .r{
     position: absolute;
     top:0;
@@ -182,6 +207,5 @@ export default {
     width: 3.37rem;
     overflow: hidden;
   }
-}
 
 </style>

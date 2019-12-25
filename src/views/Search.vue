@@ -1,12 +1,12 @@
 <template>
   <div class="div">
     <div class="top">
-      <input type="text" v-model="mytxt" @change="change()" />
+      <input type="text" v-model="mytxt" />
       <span @click="go">取消</span>
     </div>
     <searchnav></searchnav>
     <router-view></router-view>
-    <searchlist v-if="$store.state.searchlistData.lenght"></searchlist>
+    <searchlist v-if="ishow" :mytxt="mytxt"></searchlist>
   </div>
 </template>
 <script>
@@ -16,11 +16,21 @@ import searchlist from '@/components/Searchlist'
 export default {
   data () {
     return {
-      mytxt: ''
+      mytxt: '',
+      ishow: false
     }
   },
   created () {
     this.$store.state.searchlistData = []
+  },
+  watch: {
+    mytxt () {
+      if (this.mytxt.length <= 0) {
+        this.ishow = false
+      } else {
+        this.ishow = true
+      }
+    }
   },
   components: {
     searchnav,
@@ -29,18 +39,13 @@ export default {
   methods: {
     go () {
       this.$router.back()
-    },
-    change () {
-      console.log(this.$store.state.searchlistData)
-      this.$store.dispatch('getsearch', this.mytxt)
-      console.log(this.$store.state.searchlistData)
     }
   }
 }
 </script>
 
 <style lang="scss" scoped>
-.div{
+.div {
   position: relative;
   width: 100%;
   overflow: hidden;
