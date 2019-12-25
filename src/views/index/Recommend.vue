@@ -225,6 +225,8 @@ div{
       p {
         font: 0.12rem/0.12rem "宋体";
         color: #666666;
+        text-align: center;
+        margin-top: 0.1rem;
       }
     }
   }
@@ -255,6 +257,7 @@ div{
         height: 0.7rem;
         float: left;
         margin-right: 0.2rem;
+        border-radius: 0.1rem;
       }
       div {
         float: left;

@@ -2,12 +2,19 @@
   <ul ref="ul" class="hammerul">
     <router-link
       v-for="data in $store.state.headData"
-      :to="data.moduleKey"
+      :to="'/index/'+data.moduleKey"
       tag="li"
       :key="data.order"
       activeClass="active"
       :class="isflex?'flex':'lf'"
     >{{data.moduleName}}</router-link>
+  <router-link
+      to="/category"
+      tag="li"
+      key="category"
+      activeClass="active"
+      :class="isflex?'flex':'lf'"
+    >更多</router-link>
   </ul>
 
 </template>
@@ -21,6 +28,7 @@ export default {
     }
   },
   mounted () {
+    // console.log(this.$refs)
     var square = document.querySelector('.' + this.$refs.ul.className)
     var hammer = new Hammer(square)
     hammer.on('swipeleft', function (e) {
@@ -34,7 +42,6 @@ export default {
     hammer.on('swiperight', function (e) {
       var ul = e.target.parentNode
       var left = ul.offsetLeft
-      var width = ul.offsetWidth
       if (left > -150) {
         left = -150
       }
@@ -56,6 +63,7 @@ ul {
   position: relative;
   left: 0;
   transition: .5s;
+  border-bottom: 0.01rem solid #e8e8ee;
   li {
     float: left;
     height: 0.2rem;
@@ -73,9 +81,6 @@ ul {
   font: 0.18rem/0.2rem "宋体";
   color: #40404c;
   border-bottom: 0.03rem solid red;
-}
-ul {
-  border-bottom: 0.01rem solid #e8e8ee;
 }
 .flex {
   width: 150%;

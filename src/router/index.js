@@ -3,14 +3,6 @@ import VueRouter from 'vue-router'
 import Index from '@/views/Index'
 import Recommend from '@/views/index/Recommend'
 import AudioBook from '@/views/index/AudioBook'
-import CrossTalk from '@/views/index/CrossTalk'
-import Music from '@/views/index/Music'
-import Children from '@/views/index/Children'
-import Humanity from '@/views/index/Humanity'
-import Emotion from '@/views/index/Emotion'
-import History from '@/views/index/History'
-import Science from '@/views/index/Science'
-import More from '@/views/index/More'
 import topRight from '@/views/top/topRight'
 Vue.use(VueRouter)
 
@@ -26,49 +18,9 @@ const routes = [
         component: Recommend
       },
       {
-        path: 'youshengshu', // 有声书
+        path: '/index/:category', // 其余全部
         name: 'youshengshu',
         component: AudioBook
-      },
-      {
-        path: 'xiangsheng', // 相声
-        name: 'xiangsheng',
-        component: CrossTalk
-      },
-      {
-        path: 'yinyue', // 音乐
-        name: 'yinyue',
-        component: Music
-      },
-      {
-        path: 'ertong', // 儿童
-        name: 'ertong',
-        component: Children
-      },
-      {
-        path: 'renwen', // 人文
-        name: 'renwen',
-        component: Humanity
-      },
-      {
-        path: 'qinggan', // 情感
-        name: 'qinggan',
-        component: Emotion
-      },
-      {
-        path: 'lishi', // 历史
-        name: 'lishi',
-        component: History
-      },
-      {
-        path: 'keji', // 科技
-        name: 'keji',
-        component: Science
-      },
-      {
-        path: 'more', // 更多
-        name: 'more',
-        component: More
       },
       {
         path: '/index',
@@ -76,10 +28,6 @@ const routes = [
       }
     ]
   },
-  // {
-  //   path: '/top/:tou/:left', // 排行页面
-  //   component: () => import('@/views/Top.vue'),
-  // }
   {
     path: '/top', // 排行页面
     component: () => import('@/views/Top.vue'),
@@ -138,7 +86,29 @@ const routes = [
     ]
   },
   {
-    path: '/detail/:myid/:aid',
+    path: '/result', // 搜索结果
+    component: () => import('@/views/Result'),
+    children: [
+      {
+        path: '/result/all/:all',
+        component: () => import('@/views/result/ResultAll')
+      },
+      {
+        path: '/result/album/:album',
+        component: () => import('@/views/result/Album')
+      },
+      {
+        path: '/result/sound/:sound',
+        component: () => import('@/views/result/Sound')
+      },
+      {
+        path: '/result',
+        redirect: '/result/all'
+      }
+    ]
+  },
+  {
+    path: '/detail/:myid',
     name: 'detail',
     props: true,
     component: () => import('@/views/Detail.vue') // 详情

@@ -4,7 +4,7 @@
     <swiper
       v-if="$store.state.indexData.focusImages"
       :path="{
-      slidesPerView: '1',
+      slidesPerView:'1',
       centeredSlides: true,
       spaceBetween: 30,
       }"
@@ -19,17 +19,19 @@
     </swiper>
 
     <ul class="navul">
-      <router-link tag="li" :to="data.link" v-for="data in $store.state.indexData.tomatoes" :key="data.order">
+      <router-link
+        tag="li"
+        :to="data.link"
+        v-for="data in $store.state.indexData.tomatoes"
+        :key="data.order"
+      >
         <img v-lazy="data.img" alt />
         <p>{{data.name}}</p>
       </router-link>
     </ul>
     <div>
-      <ul
-        v-for="(data,i) in $store.state.indexData.moduleRankDatas"
-        :key="i"
-        class="ful"
-      >
+      <ul v-for="(data,i) in $store.state.indexData.moduleRankDatas" :key="i" class="ful">
+        <h3>{{data.moduleInfo.displayName}}</h3>
         <li
           v-for="item in data.albumBriefDetailInfos"
           :key="item.id"
@@ -62,7 +64,7 @@
       v-if="$store.state.moveData"
     >
       <h3>更多推荐</h3>
-      <li v-for="data in $store.state.moveData" :key="data.data.id">
+      <li v-for="(data,i) in $store.state.moveData" :key="data.data.id+i">
         <img v-lazy="'http://imagev2.xmcdn.com/'+data.data.albumInfo.cover" alt />
         <div>
           <h3>{{data.data.albumInfo.title}}</h3>
@@ -151,11 +153,6 @@ export default {
     headnav,
     swiper
   },
-  watch: {
-    $route (to, from) {
-      console.log(to.path)
-    }
-  },
   beforeCreate () {
     Indicator.open({
       text: '加载中...',
@@ -163,23 +160,26 @@ export default {
     })
   },
   created () {
-    this.$store.dispatch('getindexdata', this.$route.name)
+    this.$store.dispatch('getindexdata', this.$route.params.category)
+  },
+  watch: {
+    $route () {
+      this.$store.dispatch('getindexdata', this.$route.params.category)
+      window.onscroll = null
+      this.$store.state.indexData = []
+      document.documentElement.scrollTop = 0
+      document.body.scrollTop = 0
+      this.$store.state.moveData = []
+    }
   },
   mounted () {
     window.onscroll = this.myscroll
-  },
-  beforeDestroy () {
-    window.onscroll = null
-    this.$store.state.indexData = []
-    document.documentElement.scrollTop = 0
-    document.body.scrollTop = 0
-    this.$store.state.moveData = []
   },
   props: ['boolean'],
   methods: {
     indexclick (id, aid) {
       // this.$router.push(`/detail/${id}`);
-      this.$router.push({ name: 'detail', params: { myid: id, aid: aid } })
+      this.$router.push({ name: 'detail', params: { myid: id } })
     },
     myscroll () {
       if (
@@ -213,21 +213,14 @@ image[lazy="loading"] {
   margin: auto;
 }
 .swiper-slide {
-  width: 200%;
   img {
     height: 1.39rem;
     width: 3.23rem;
     overflow: auto;
   }
 }
-// .swiper-slide-prev{
-
-// }
-// .swiper-slide-next{
-
-// }
-.swiper-slide-active{
-  left:0.5rem;
+.swiper-slide-active {
+  left: 0.45rem;
 }
 div {
   width: 100%;
@@ -248,6 +241,8 @@ div {
         border-radius: 50%;
       }
       p {
+        text-align: center;
+        margin-top: 0.1rem;
         font: 0.12rem/0.12rem "宋体";
         color: #666666;
       }
@@ -264,9 +259,6 @@ div {
       color: #333333;
       font-weight: bold;
       span {
-        // display: inline-block;
-        // width: 3rem;
-        // text-align: right;
         float: right;
         margin-right: 0.3rem;
         font: 0.12rem/0.24rem "宋体";
@@ -283,6 +275,7 @@ div {
         height: 0.7rem;
         float: left;
         margin-right: 0.2rem;
+        border-radius: 0.1rem;
       }
       div {
         float: left;
@@ -336,6 +329,7 @@ div {
         width: 1.22rem;
         height: 1.22rem;
         display: block;
+        border-radius: 0.1rem;
       }
       div {
         h3 {
@@ -355,7 +349,7 @@ div {
         }
       }
     }
-    li:nth-child(3) ~ li {
+    li:nth-child(4) ~ li {
       width: 100%;
       height: auto;
       overflow: hidden;
@@ -366,6 +360,7 @@ div {
         height: 0.7rem;
         float: left;
         margin-right: 0.2rem;
+        border-radius: 0.1rem;
       }
       div {
         float: left;

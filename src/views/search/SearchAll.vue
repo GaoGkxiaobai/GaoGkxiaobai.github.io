@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div v-for="(data,i) in $store.state.allsearchData" :key="i" class="toli">
+    <div v-for="(data,i) in $store.state.allsearchData" :key="i" class="toli" @click="searchclick(data.word)">
       <span>{{i+1}}</span>
       <p>{{data.word}}</p>
       <i v-if="(data.shift)==1" class="iconfont icon-web-icon-"></i>
@@ -17,6 +17,11 @@ export default {
   watch: {
     $route () {
       this.$store.dispatch('getallsearch', this.$route.params.search)
+    }
+  },
+  methods: {
+    searchclick (data) {
+      this.$router.push(`/result/all/${data}`)
     }
   }
 }

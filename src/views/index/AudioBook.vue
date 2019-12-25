@@ -1,14 +1,9 @@
 <template>
-<indexcomponent :boolean="boolean"></indexcomponent>
+<indexcomponent></indexcomponent>
 </template>
 <script>
 import indexcomponent from '@/components/Indexcomponet'
 export default {
-  data () {
-    return {
-      boolean: false
-    }
-  },
   components: {
     indexcomponent
   }

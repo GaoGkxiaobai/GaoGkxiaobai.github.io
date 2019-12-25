@@ -37,7 +37,7 @@ export default new Vuex.Store({
       state.topH = h
     },
     [GET_MOVE_DATA] (state, data) {
-      state.moveData = data
+      state.moveData = [...state.moveData, ...data]
     },
     [GET_SEARCH_DATA] (state, data) {
       state.searchData = data
@@ -109,6 +109,14 @@ export default new Vuex.Store({
         url: `revision/suggest?kw=${data}&paidFilter=false&scope=all`
       }).then(res => {
         store.commit(GET_SEARCHLIST_DATA, res.data.data.result)
+      })
+    },
+    getresultall (store) {
+      Axios({
+        url: `https://m.ximalaya.com/m-revision/page/search?kw=%E5%8D%95%E7%94%B0%E8%8A%B3&core=all&page=1&rows=5`
+      }).then(res => {
+        console.log(res.data.data)
+        // store.commit(GET_SEARCHLIST_DATA, res.data.data.result)
       })
     }
   },

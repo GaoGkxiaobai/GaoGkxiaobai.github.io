@@ -1,22 +1,13 @@
 <template>
   <ul ref="ul" class="hammerul">
-    <router-link
-      v-for="data in $store.state.searchData"
-      :to="'/search/'+data.categoryId"
-      tag="li"
-      :key="data.categoryId"
-      activeClass="active"
-    >{{data.categoryName}}</router-link>
+    <slot></slot>
   </ul>
-
 </template>
 <script>
 import Hammer from 'hammerjs'
 export default {
   created () {
-    if (this.$store.state.searchData.length === 0) {
-      this.$store.dispatch('getsearchdata')
-    }
+
   },
   mounted () {
     var square = document.querySelector('.' + this.$refs.ul.className)

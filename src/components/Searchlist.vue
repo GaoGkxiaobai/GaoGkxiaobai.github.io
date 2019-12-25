@@ -21,7 +21,7 @@
       <li
         v-for="data in  $store.state.searchlistData.queryResultList"
         :key="data.id"
-      >{{data.keyword}}</li>
+      @click="listclick(data.keyword)">{{data.keyword}}</li>
     </ul>
   </div>
 </template>
@@ -82,7 +82,10 @@ export default {
   },
   methods: {
     click (id) {
-      this.$router.push({ name: 'detail', params: { myid: id, aid: aid } })
+      this.$router.push({ name: 'detail', params: { myid: id } })
+    },
+    listclick (data) {
+      this.$router.push(`/result/all/${data}`)
     }
   },
   props: ['mytxt']
@@ -123,6 +126,7 @@ export default {
         position: absolute;
         top:0;
         left: 0.1rem;
+        border: 0.01rem solid #ccc;
       }
       span:nth-child(2) {
         font: 0.12rem/0.12rem "宋体";
@@ -130,7 +134,7 @@ export default {
         margin-right: 0.1rem;
         position: absolute;
         top:0;
-        left: 0.6rem;
+        left: 0.7rem;
       }
       span:nth-child(3) {
         font: 0.12rem/0.12rem "宋体";

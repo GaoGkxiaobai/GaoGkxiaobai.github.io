@@ -4,7 +4,15 @@
       <input type="text" v-model="mytxt" />
       <span @click="go">取消</span>
     </div>
-    <searchnav></searchnav>
+    <searchnav>
+      <router-link
+      v-for="data in $store.state.searchData"
+      :to="'/search/'+data.categoryId"
+      tag="li"
+      :key="data.categoryId"
+      activeClass="active"
+    >{{data.categoryName}}</router-link>
+    </searchnav>
     <router-view></router-view>
     <searchlist v-if="ishow" :mytxt="mytxt"></searchlist>
   </div>
@@ -21,6 +29,9 @@ export default {
     }
   },
   created () {
+    if (this.$store.state.searchData.length === 0) {
+      this.$store.dispatch('getsearchdata')
+    }
     this.$store.state.searchlistData = []
   },
   watch: {
@@ -38,7 +49,7 @@ export default {
   },
   methods: {
     go () {
-      this.$router.back()
+      this.$router.push('/index')
     }
   }
 }
