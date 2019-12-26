@@ -3,7 +3,6 @@
         <topTou></topTou>
 
         <router-view></router-view>
-
     </div>
 </template>
 <script>

@@ -1,8 +1,8 @@
 <template>
   <div class="box">
       <div class="paihangLeft" ref="ul">
-      <router-link v-for="data in topLeftList[this.top]"  :key="data.pinyin" :to="'/top/'+top+'/'+data.pinyin"  class="paihangLeft_p" tag="p" activeClass="active" >{{data.name}}</router-link>
-    </div>
+        <router-link v-for="data in topLeftList[this.top]"  :key="data.pinyin" :to="'/top/'+top+'/'+data.pinyin"  class="paihangLeft_p" tag="p" activeClass="active" >{{data.name}}</router-link>
+      </div>
 
     <router-view class="r"></router-view>
   </div>
@@ -72,6 +72,8 @@ export default {
   props: [
     'top'
   ],
+  components: {
+  },
   mounted () {
     var square = document.querySelector('.' + this.$refs.ul.className)
     var hammer = new Hammer(square)
@@ -95,47 +97,9 @@ export default {
       // ul.style.top = top + 150 + 'px'
     })
   },
-  // mounted () {
-  // new BScroll('.ggk', {
-  //   scrollbar: {
-  //     fade: true,
-  //     interactive: false // 1.8.0 新增
-  //   }
-  // })
-  // },
-  // mounted () {
-  //   Axios({
-  //     url: '/revision/rank/v2/cluster'
-  //     // http://m.ximalaya.com/revision/rank/v2/cluster
-  //     // https://www.ximalaya.com/revision/rank/v2/cluster
-  //   }).then((res) => {
-  //     // console.log(res.data.data.clusterType)
-  //     this.topLeftList=res.data.data.clusterType
-  //     console.log(this.topLeftList)
-  //   })
-  // },
   watch: {
-    // $route(to , from ){
-    //   // console.log('慌了')
-
-    //   this.huantou()
-    // }
   },
   methods: {
-    // shi () {
-    //   console.log(this.top)
-    // }
-    // 换头时触发
-    // huantou(){
-    //   if(this.top!=this.touzhi){
-    //     // console.log(1)
-
-    //     this.list=
-
-    //     this.touzhi=this.top;
-
-    //   }
-    // }
   }
 }
 </script>
