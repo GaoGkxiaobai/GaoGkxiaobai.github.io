@@ -1,7 +1,8 @@
 <template>
     <div class="waicheng">
       <ul class="toprightul clear ggk1">
-        <li class="toprightli clear" v-for="(data,index) in list" :key="data.id">
+        <router-link tag="li" :to="'/detail/'+data.id" class="toprightli clear" v-for="(data,index) in list" :key="data.id">
+        <!-- <li class="toprightli clear" v-for="(data,index) in list" :key="data.id"> -->
           <span class="iconfont toprightliic color1 spancolor" v-if="index==0">
             &#xe630;
           </span>
@@ -24,7 +25,8 @@
             <span class="iconfont ">&#xe87c;</span>
             <span>{{data.statCountInfo.trackCount}}</span>
           </div>
-        </li>
+        <!-- </li> -->
+        </router-link>
     </ul>
     </div>
 
@@ -106,7 +108,7 @@ export default {
       Axios({
         url: `https://m.ximalaya.com/m-revision/page/rank/queryRank?clusterCode=${this.top}&categoryCode=${this.left}`
       }).then((res) => {
-        // console.log(res.data.data.rankModuleInfoList)
+        console.log(res.data.data.rankModuleInfoList)
         Indicator.close()
         this.list = res.data.data.rankModuleInfoList
         document.documentElement.scrollTop = 0

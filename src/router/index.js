@@ -119,9 +119,14 @@ const routes = [
     component: () => import('@/views/Categoryall.vue') // 全部分类
   },
   {
-    path: '*',
-    redirect: '/index'
+    path: '/jihe/:lei/:juti/', // 分类排行点击进入
+    props: true,
+    component: () => import('@/views/fenleijihe.vue')
   }
+  // {
+  //   path: '*',
+  //   redirect: '/index'
+  // }
 ]
 
 const router = new VueRouter({

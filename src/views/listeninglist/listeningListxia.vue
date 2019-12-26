@@ -6,6 +6,7 @@
         infinite-scroll-disabled="loading"
         infinite-scroll-distance="10"
         >
+          <!-- <router-link v-for="data in tingdanlist" tag="li" :to="'/detail/'+data.id" :key="data.id" class="listenlinglistli" > -->
           <li v-for="data in tingdanlist" :key="data.id" class="listenlinglistli" >
             <img v-lazy="'http:'+data.coverPathSmall" :alt="data.intro">
             <div class="listenlinglistliright">
@@ -17,6 +18,7 @@
                   <span>{{data.releaseAt | Time}}</span>
                 </p>
             </div>
+          <!-- </router-link> -->
           </li>
         </ul>
     </div>
@@ -77,7 +79,7 @@ Vue.filter('filter', list => {
 
 // 年月日
 Vue.filter('Time', function getTime (nS) {
-  var date = new Date(parseInt(nS) * 1000)
+  var date = new Date(parseInt(nS))
   var year = date.getFullYear()
   var mon = date.getMonth() + 1
   var day = date.getDate()

@@ -17,7 +17,6 @@
             <ul class="isjiahao_ul clear" >
                 <router-link v-for="data in this.list" :key="data.pinyin" :to="'/ting/'+data.pinyin" class="isjiahao_li" tag="li" activeClass="activetingtou">{{data.name}}</router-link>
             </ul>
-
         </div>
     </div>
 </template>
@@ -204,6 +203,7 @@ export default {
         background-color: white;
         overflow: auto;
         padding: 0.075rem 5%;
+        height: 3.45rem;
         .isjiahao_li{
             background: #f3f4f5;
             color: #40404c;
