@@ -92,7 +92,7 @@ export default {
   props: ['path'],
   methods: {
     resutltclick (id) {
-      this.$route.push(`/datail/${id}`)
+      this.$router.push(`/detail/${id}`)
     }
   },
   created () {
