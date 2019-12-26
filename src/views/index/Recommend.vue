@@ -240,7 +240,6 @@ div{
       color: #333333;
       font-weight: bold;
       span {
-
         float: right;
         margin-right: 0.3rem;
         font: 0.12rem/0.24rem "宋体";

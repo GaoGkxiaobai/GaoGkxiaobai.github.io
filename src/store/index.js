@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import Axios from 'axios'
-import { GET_HEADNAV_DATA, GET_INDEX_DATA, GET_HEIGHT_DATA, GET_MOVE_DATA, GET_SEARCH_DATA, GET_ALLSEARCH_DATA, GET_SEARCHLIST_DATA, GET_TUIJAIN_DATA } from './type'
+import { GET_HEADNAV_DATA, GET_INDEX_DATA, GET_HEIGHT_DATA, GET_MOVE_DATA, GET_SEARCH_DATA, GET_ALLSEARCH_DATA, GET_SEARCHLIST_DATA, GET_TUIJAIN_DATA, GET_RESULT_DATA } from './type'
 import { Indicator } from 'mint-ui'
 Vue.use(Vuex)
 
@@ -15,7 +15,8 @@ export default new Vuex.Store({
     searchData: [],
     allsearchData: [],
     searchlistData: [],
-    tuijianData: []
+    tuijianData: [],
+    resultData: null
   },
   getters: {
 
@@ -47,6 +48,9 @@ export default new Vuex.Store({
     },
     [GET_SEARCHLIST_DATA] (state, data) {
       state.searchlistData = data
+    },
+    [GET_RESULT_DATA] (state, data) {
+      state.resultData = data
     }
   },
   actions: {
@@ -111,12 +115,12 @@ export default new Vuex.Store({
         store.commit(GET_SEARCHLIST_DATA, res.data.data.result)
       })
     },
-    getresultall (store) {
+    getresultall (store, path) {
       Axios({
-        url: `https://m.ximalaya.com/m-revision/page/search?kw=%E5%8D%95%E7%94%B0%E8%8A%B3&core=all&page=1&rows=5`
+        url: `https://m.ximalaya.com/m-revision/page/search?kw=${path}&core=all&page=1&rows=5`
       }).then(res => {
-        console.log(res.data.data)
-        // store.commit(GET_SEARCHLIST_DATA, res.data.data.result)
+        // console.log(res.data.data)
+        store.commit(GET_RESULT_DATA, res.data.data)
       })
     }
   },

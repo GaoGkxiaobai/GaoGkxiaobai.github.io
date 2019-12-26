@@ -20,7 +20,7 @@
       activeClass="active"
     >声音</router-link>
     </searchnav>
-    <router-view></router-view>
+    <router-view :path="path"></router-view>
     </div>
 </template>
 

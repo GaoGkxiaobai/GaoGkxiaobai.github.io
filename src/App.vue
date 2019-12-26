@@ -1,8 +1,8 @@
 <template>
-  <div>
+  <div class="container">
     <div class="top" ref="mytop">
-      <img src="img/喜马拉雅.png" alt @click="click" />
-      <input type="text" placeholder="搜索" @click="search" />
+      <img src="img/喜马拉雅.png" alt @click="click"/>
+      <input type="text" placeholder="搜索" @click="search"  v-model="mytxt"/>
     </div>
 
     <router-view></router-view>
@@ -11,8 +11,18 @@
 
 <script>
 export default {
+  data () {
+    return {
+      mytxt: ''
+    }
+  },
   mounted () {
     this.$store.dispatch('gettopheight', this.$refs.mytop.offsetHeight)
+  },
+  watch: {
+    $router () {
+      console.log(this.$route)
+    }
   },
   methods: {
     search () {
@@ -102,6 +112,9 @@ input {
 }
 .fr {
   float: right;
+}
+.container{
+  overflow: hidden;
 }
 .top {
   position: fixed;
