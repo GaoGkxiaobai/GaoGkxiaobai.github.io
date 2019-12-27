@@ -144,7 +144,6 @@ export default {
         this.shaixuan[this.jutilist[i].name] = this.jutilist[i].displayName
       }
       this.list = res.data.data.firstPageCategoryAlbums
-      console.log(this.list)
     })
   },
   watch: {
@@ -246,7 +245,6 @@ export default {
       if (this.juti != 'quanbu') {
         aaa += `&subCategoryCode=${this.juti}`
       }
-      console.log(this.index)
       aaa += `&page=${this.index}&pageSize=30&sort=${this.paihang}`
       for (let i = 0, z = 0, x = 0; i < this.jutilist.length; i++) {
         if (this.shaixuan[this.jutilist[i].name] != this.jutilist[i].displayName) {
@@ -267,7 +265,6 @@ export default {
       }
       // https://m.ximalaya.com/m-revision/page/category/queryCategoryPage?categoryCode=youshengshu&subCategoryCode=wenxue&page=3&pageSize=30&sort=0
       // https://m.ximalaya.com/m-revision/page/category/queryCategoryAlbumsByPage?categoryCode=youshengshu&subCategoryCode=wenxue&page=3&pageSize=30&sort=0
-      console.log(aaa)
       Axios({
         url: aaa
       }).then((res) => {
@@ -301,7 +298,7 @@ export default {
     transition: all .2s;
     border-bottom: 0.01rem solid #e8e8e8;
     position: fixed;
-    top: 50px;
+    top: 0.5rem;
     z-index: 200;
     // width: 100%;
     .fixed{
@@ -329,9 +326,7 @@ export default {
         width: 0.44rem;
         height: 0.43rem;
         float: right;
-        // position: absolute;
         right: 0;
-        // display: inline-block;
         border-left: 0.01rem solid #efefef;
         line-height: 0.43rem;
         text-align: center;
@@ -340,7 +335,6 @@ export default {
     .listeninglisttou_ul{
 
         height: 0.45rem;
-        // padding: 0;
         background-color: white;
         line-height: 0.45rem;
         display: inline-block;
@@ -386,7 +380,7 @@ export default {
 .isjiahao_box{
     background-color: white;
     position: fixed;
-    top: 50px;
+    top: 0.5rem;
     left: 0;
     right: 0;
     height: 0.45rem;
@@ -511,6 +505,7 @@ export default {
                     margin: 0.05rem 0 0.07rem;
                     font-size: 0.13rem;
                     line-height: 0.13rem;
+                    padding: 0.01rem 0 0.01rem;
                     height: 0.13rem;
                     overflow: hidden;
                     white-space: nowrap;
