@@ -29,7 +29,6 @@ export default {
     Axios({
       url: `https://m.ximalaya.com/m-revision/page/category/queryCategories`
     }).then(res => {
-      console.log(res.data.data)
       this.datalist = res.data.data
     })
   },

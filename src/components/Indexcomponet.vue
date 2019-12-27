@@ -1,8 +1,9 @@
 <template>
-  <div  v-infinite-scroll="loadMore"
-      infinite-scroll-disabled="loading"
-      infinite-scroll-distance="20"
-      infinite-scroll-immediate-check="false"
+  <div
+        v-infinite-scroll="loadMore"
+        infinite-scroll-disabled="loading"
+        infinite-scroll-distance="10"
+        infinite-scroll-immediate-check='false'
       >
     <headnav :class="isflex?'flex':''"></headnav>
     <swiper
@@ -224,7 +225,6 @@ image[lazy="loading"] {
 }
 div {
   width: 100%;
-  overflow: hidden;
   ul.navul {
     overflow: hidden;
     display: inline-block;
