@@ -1,5 +1,9 @@
 <template>
-  <div>
+  <div  v-infinite-scroll="loadMore"
+      infinite-scroll-disabled="loading"
+      infinite-scroll-distance="20"
+      infinite-scroll-immediate-check="false"
+      >
     <headnav :class="isflex?'flex':''"></headnav>
     <swiper
       v-if="$store.state.indexData.focusImages"
@@ -56,12 +60,8 @@
       </ul>
     </div>
     <ul
-      v-infinite-scroll="loadMore"
-      infinite-scroll-disabled="loading"
-      infinite-scroll-distance="5"
-      infinite-scroll-immediate-check="false"
-      class="moveul"
       v-if="$store.state.moveData"
+      class="moveul"
     >
       <h3>更多推荐</h3>
       <li v-for="(data,i) in $store.state.moveData" :key="data.data.id+i">
@@ -281,7 +281,9 @@ div {
         float: left;
         width: 2.89rem;
         h3 {
-          font: 0.16rem/0.16rem "宋体";
+          padding: 0.05rem;
+          height: 0.18rem;
+          font: 0.16rem/0.18rem "宋体";
           color: #333333;
           white-space: nowrap;
           overflow: hidden;
@@ -333,8 +335,10 @@ div {
       }
       div {
         h3 {
+          padding: 0.05rem;
           margin: 0;
-          font: 0.13rem/0.13rem "宋体";
+          height: 0.15rem;
+          font: 0.13rem/0.15rem "宋体";
           color: #333333;
           white-space: nowrap;
           overflow: hidden;
@@ -366,7 +370,9 @@ div {
         float: left;
         width: 2.89rem;
         h3 {
-          font: 0.16rem/0.16rem "宋体";
+          padding: 0.05rem;
+          height: 0.18rem;
+          font: 0.16rem/0.18rem "宋体";
           color: #333333;
           white-space: nowrap;
           overflow: hidden;

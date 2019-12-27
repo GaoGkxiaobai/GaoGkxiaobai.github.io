@@ -267,7 +267,9 @@ div{
         float: left;
         width: 2.89rem;
         h3 {
+          height: 0.16rem;
           font: 0.16rem/0.16rem "宋体";
+          padding: 0.05rem;
           color: #333333;
           white-space: nowrap;
           overflow: hidden;

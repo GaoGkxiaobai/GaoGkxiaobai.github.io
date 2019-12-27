@@ -97,6 +97,7 @@ export default {
   // left: 1rem;
   padding: 0 0 0.075rem  0.075rem;
   h3{
+    pad: 0.05rem;
     width: 90%;
     height: 0.5rem;
     font: 0.14rem/0.5rem "宋体";

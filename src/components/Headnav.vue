@@ -61,7 +61,7 @@ ul {
   padding: 0.01rem;
   position: relative;
   left: 0;
-  transition: .5s;
+  transition: .2s;
   border-bottom: 0.01rem solid #e8e8ee;
   li {
     float: left;

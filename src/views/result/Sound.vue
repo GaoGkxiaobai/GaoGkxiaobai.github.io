@@ -107,6 +107,8 @@ export default {
   width: 100%;
   padding-top: 0.2rem;
   h3 {
+    padding: 0.05rem;
+    height: 0.18rem;
     font: 0.18rem/0.18rem "宋体";
     color: #40404c;
     width: 100%;
@@ -126,6 +128,8 @@ export default {
     div {
       // overflow: hidden;
       h3 {
+        padding: 0.05rem;
+        height: 0.22rem;
         font: 0.16rem/0.22rem "宋体";
         color: #40404c;
         font-weight: 600;

@@ -113,6 +113,8 @@ export default {
   div {
     float: left;
     h3 {
+      padding: 0.05rem;
+      height: 0.14rem;
       font: 0.14rem/0.14rem "宋体";
       color: #40404c;
     }

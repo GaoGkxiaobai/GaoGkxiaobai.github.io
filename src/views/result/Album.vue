@@ -261,7 +261,9 @@ export default {
   padding-left: 0.15rem;
   padding-top: 0.2rem;
   h3 {
-    font: 0.18rem/0.1rem "宋体";
+    height: 0.18rem;
+    padding: 0.05rem;
+    font: 0.18rem/0.18rem "宋体";
     color: #40404c;
     width: 100%;
     white-space: nowrap;
@@ -289,6 +291,8 @@ export default {
       float: left;
       width: 3.04rem;
       h3 {
+        padding: 0.05rem;
+        height: 0.16rem;
         font: 0.16rem/0.16rem "宋体";
         color: #333;
         margin-bottom: 0.1rem;

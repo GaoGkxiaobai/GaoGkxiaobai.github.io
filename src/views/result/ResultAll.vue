@@ -111,8 +111,9 @@ export default {
     var hammer = new Hammer(square)
     hammer.on('swipeleft', function (e) {
       var ul = e.target.closest('ul')
+      var li = ul.lastElementChild
       var left = ul.offsetLeft
-      if (-left >= ul.offsetWidth / 2) {
+      if (-left + 300 >= li.offsetLeft + li.offsetWidth) {
         left = 150
       }
       ul.style.left = left - 200 + 'px'
@@ -146,7 +147,7 @@ export default {
   position: relative;
   left: 0;
   overflow-x: auto;
-  transition: 0.5s;
+  transition: 0.2s;
   li {
     float: left;
     // overflow: hidden
@@ -179,6 +180,8 @@ export default {
   padding-left: 0.15rem;
   padding-top: 0.2rem;
   h3 {
+    padding: 0.05rem;
+    height: 0.18rem;
     font: 0.18rem/0.18rem "宋体";
     color: #40404c;
     width: 100%;
@@ -207,6 +210,8 @@ export default {
       float: left;
       width: 3.04rem;
       h3 {
+        padding: 0.05rem;
+        height: 0.16rem;
         font: 0.16rem/0.16rem "宋体";
         color: #333;
       }
@@ -231,6 +236,8 @@ export default {
   width: 100%;
   padding-top: 0.2rem;
   h3 {
+    padding: 0.05rem;
+    height: 0.18rem;
     font: 0.18rem/0.18rem "宋体";
     color: #40404c;
     width: 100%;
@@ -256,6 +263,8 @@ export default {
     div {
       // overflow: hidden;
       h3 {
+        padding: 0.05rem;
+        height: 0.22rem;
         font: 0.16rem/0.22rem "宋体";
         color: #40404c;
         font-weight: 600;
@@ -278,6 +287,8 @@ export default {
   width: 100%;
   padding-top: 0.2rem;
   h3 {
+    padding: 0.05rem;
+    height: 0.18rem;
     font: 0.18rem/0.18rem "宋体";
     color: #40404c;
     width: 100%;
@@ -302,6 +313,8 @@ export default {
     div {
       // overflow: hidden;
       h3 {
+        padding: 0.05rem;
+        height: 0.16rem;
         font: 0.16rem/0.16rem "宋体";
         color: #40404c;
       }
