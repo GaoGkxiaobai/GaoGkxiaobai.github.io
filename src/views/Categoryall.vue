@@ -43,7 +43,7 @@ export default {
       // evt.target.setAttribute('class','active')
     },
     categoryclick (id) {
-      this.$router.push(`/jihe/${id}`)
+      this.$router.push(`/jihe${id}`)
     }
     // myscroll(){
     //   // console.log(this.$refs.scrolla[0])

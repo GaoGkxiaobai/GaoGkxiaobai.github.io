@@ -21,7 +21,7 @@
     <ul class="navul">
       <router-link
         tag="li"
-        :to="data.link"
+        :to="'/jihe'+data.link"
         v-for="data in $store.state.indexData.tomatoes"
         :key="data.order"
       >

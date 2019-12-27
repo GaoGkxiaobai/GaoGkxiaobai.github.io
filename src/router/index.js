@@ -121,12 +121,18 @@ const routes = [
   {
     path: '/jihe/:lei/:juti/', // 分类排行点击进入
     props: true,
-    component: () => import('@/views/fenleijihe.vue')
+    component: () => import('@/views/fenleijihe.vue'),
+    children: [
+      {
+        path: '/jihe/:lei',
+        redirect: '/jihe/:lei/quanbu'
+      }
+    ]
+  },
+  {
+    path: '*',
+    redirect: '/index'
   }
-  // {
-  //   path: '*',
-  //   redirect: '/index'
-  // }
 ]
 
 const router = new VueRouter({
