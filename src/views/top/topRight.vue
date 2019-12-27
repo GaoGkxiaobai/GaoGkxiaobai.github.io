@@ -107,10 +107,6 @@ export default {
       Axios({
         url: `https://m.ximalaya.com/m-revision/page/rank/queryRank?clusterCode=${this.top}&categoryCode=${this.left}`
       }).then((res) => {
-<<<<<<< HEAD
-=======
-        console.log(res.data.data.rankModuleInfoList)
->>>>>>> 463a18d87a7180c09632946567c8ccdd27d0c323
         Indicator.close()
         this.list = res.data.data.rankModuleInfoList
         document.documentElement.scrollTop = 0

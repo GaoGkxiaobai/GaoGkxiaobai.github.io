@@ -29,10 +29,14 @@
           <span @click="zuijin()" :class="(paihang==1)?'active':''">最近更新</span>
           <i class="jihe_tou_saixuan" @click="saixuan()">{{issaixuan?'收起':'筛选'}}</i>
           <div class="jihe_tou_false" v-if="issaixuan">
-            <div class="jihe_tou_false_div" v-for="data in jutilist" :key="data.id"><span class="active">{{data.displayName}}</span><span v-for="item in data.metaValues" :key="item.id">{{item.displayName}}</span></div>
+            <div class="jihe_tou_false_div" v-for="data in jutilist" :key="data.id"><span :class="shaixuan[data.name]==data.displayName?'active':''" @click="shaixuanactive(data.name,data.displayName)">{{data.displayName}}</span><span  v-for="item in data.metaValues" :key="item.id"  :class="shaixuan[data.name]==item.displayName?'active':''"  @click="shaixuanactive(data.name,item.displayName)">{{item.displayName}}</span></div>
           </div>
         </div>
-        <ul class="jihe_list">
+        <ul class="jihe_list"
+        v-infinite-scroll="loadMore"
+        infinite-scroll-disabled="loading"
+        infinite-scroll-distance="10"
+        >
             <li class="jihe_list_li" v-for="data in list.albumBriefDetailInfos" :key="data.id">
                 <img class="jihe_list_li_img" :src="'http://imagev2.xmcdn.com/'+data.albumInfo.cover" :alt="data.albumInfo.title">
                 <div class="jihe_list_li_div">
@@ -109,12 +113,13 @@ export default {
       list: [],
       isjiahao: false,
       issaixuan: false,
-      paihang: 0
+      paihang: 0,
+      shaixuan: {},
+      index: 1
     }
   },
   props: ['lei', 'juti'],
   mounted () {
-    // console.log(this.juti)
     Indicator.open({
       text: '加载中...',
       spinnerType: 'fading-circle'
@@ -123,16 +128,17 @@ export default {
     if (this.juti != 'quanbu') {
       aaa += `&subCategoryCode=${this.juti}`
     }
-    aaa += `&pageSize=30&sort=${this.paihang}`
+    aaa += `&page=1&pageSize=30&sort=${this.paihang}`
     Axios({
       url: aaa
       // 全部：https://m.ximalaya.com/m-revision/page/category/queryCategoryPage?categoryCode=youshengshu&pageSize=30&sort=0
     }).then((res) => {
-    //   console.log(res.data.data.categoryMetaDatas)
       Indicator.close()
       this.leilist = res.data.data.subCategories
-      // console.log(this.leilist)
       this.jutilist = res.data.data.categoryMetaDatas
+      for (let i = 0; i < this.jutilist.length; i++) {
+        this.shaixuan[this.jutilist[i].name] = this.jutilist[i].displayName
+      }
       this.list = res.data.data.firstPageCategoryAlbums
     })
   },
@@ -145,40 +151,116 @@ export default {
   methods: {
     zonghe () {
       this.paihang = 0
-      this.jiazai()
+      this.shaixuanjiazai()
     },
     zuiduo () {
       this.paihang = 2
-      this.jiazai()
+      this.shaixuanjiazai()
     },
     zuijin () {
       this.paihang = 1
-      this.jiazai()
+      this.shaixuanjiazai()
     },
     dianjijiahao () {
-      // console.log(1)
       this.isjiahao = true
       this.issaixuan = false
     },
     dianjichenghao () {
-      // console.log(2)
       this.isjiahao = false
       this.issaixuan = false
+    },
+    shaixuanjiazai () {
+      Indicator.open({
+        text: '加载中...',
+        spinnerType: 'fading-circle'
+      })
+      this.index = 1
+      let aaa = `https://m.ximalaya.com/m-revision/page/category/queryCategoryPage?categoryCode=${this.lei}`
+      if (this.juti != 'quanbu') {
+        aaa += `&subCategoryCode=${this.juti}`
+      }
+      aaa += `&page=1&pageSize=30&sort=${this.paihang}`
+      for (let i = 0, z = 0, x = 0; i < this.jutilist.length; i++) {
+        if (this.shaixuan[this.jutilist[i].name] != this.jutilist[i].displayName) {
+          if (z == 0) {
+            aaa += '&metas='
+            z++
+          }
+          for (let j = 0; j < this.jutilist[i].metaValues.length; j++) {
+            if (this.shaixuan[this.jutilist[i].name] == this.jutilist[i].metaValues[j].displayName) {
+              if (x != 0) {
+                aaa += '-'
+              }
+              x++
+              aaa += `${this.jutilist[i].id}_${this.jutilist[i].metaValues[j].id}`
+            }
+          }
+        }
+      }
+      Axios({
+        url: aaa
+      }).then((res) => {
+        Indicator.close()
+        this.leilist = res.data.data.subCategories
+        this.jutilist = res.data.data.categoryMetaDatas
+        this.list = res.data.data.firstPageCategoryAlbums
+      })
     },
     jiazai () {
       Indicator.open({
         text: '加载中...',
         spinnerType: 'fading-circle'
       })
+      this.index = 1
       let aaa = `https://m.ximalaya.com/m-revision/page/category/queryCategoryPage?categoryCode=${this.lei}`
       if (this.juti != 'quanbu') {
         aaa += `&subCategoryCode=${this.juti}`
       }
-      aaa += `&pageSize=30&sort=${this.paihang}`
+      aaa += `&page=1&pageSize=30&sort=${this.paihang}`
+      Axios({
+        url: aaa
+        // 全部：https://m.ximalaya.com/m-revision/page/category/queryCategoryPage?categoryCode=youshengshu&pageSize=30&sort=0
+      }).then((res) => {
+        Indicator.close()
+        this.leilist = res.data.data.subCategories
+        this.jutilist = res.data.data.categoryMetaDatas
+        for (let i = 0; i < this.jutilist.length; i++) {
+          this.shaixuan[this.jutilist[i].name] = this.jutilist[i].displayName
+        }
+        this.list = res.data.data.firstPageCategoryAlbums
+      })
+    },
+    loadMore () {
+      Indicator.open({
+        text: '加载中...',
+        spinnerType: 'fading-circle'
+      })
+      this.index++
+      let aaa = `https://m.ximalaya.com/m-revision/page/category/queryCategoryPage?categoryCode=${this.lei}`
+      if (this.juti != 'quanbu') {
+        aaa += `&subCategoryCode=${this.juti}`
+      }
+      aaa += `&page=${this.index}&pageSize=30&sort=${this.paihang}`
+      for (let i = 0, z = 0, x = 0; i < this.jutilist.length; i++) {
+        if (this.shaixuan[this.jutilist[i].name] != this.jutilist[i].displayName) {
+          if (z == 0) {
+            aaa += '&metas='
+            z++
+          }
+          for (let j = 0; j < this.jutilist[i].metaValues.length; j++) {
+            if (this.shaixuan[this.jutilist[i].name] == this.jutilist[i].metaValues[j].displayName) {
+              if (x != 0) {
+                aaa += '-'
+              }
+              x++
+              aaa += `${this.jutilist[i].id}_${this.jutilist[i].metaValues[j].id}`
+            }
+          }
+        }
+      }
       Axios({
         url: aaa
       }).then((res) => {
-        // console.log(res.data.data)
         Indicator.close()
         this.leilist = res.data.data.subCategories
         this.jutilist = res.data.data.categoryMetaDatas
@@ -187,6 +269,10 @@ export default {
     },
     saixuan () {
       this.issaixuan = !(this.issaixuan)
+    },
+    shaixuanactive (name, displayName) {
+      this.shaixuan[name] = displayName
+      this.shaixuanjiazai()
     }
   }
 
@@ -409,6 +495,7 @@ export default {
                     margin: 0.05rem 0 0.07rem;
                     font-size: 0.13rem;
                     line-height: 0.13rem;
+                    height: 0.13rem;
                     overflow: hidden;
                     white-space: nowrap;
                     color: #999;
