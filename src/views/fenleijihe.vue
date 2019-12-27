@@ -315,17 +315,19 @@ export default {
     }
     .listeninglisttou_box{
 
-    // width: 100%;
+    width: 100%;
     height: 0.45rem;
     font-size: 0.14rem;
-    // overflow: hidden;
     line-height: 0.45rem;
     position: relative;
     border-bottom: 0.01rem solid #a3a3ac;
     .listeninglisttou_right{
         width: 0.44rem;
         height: 0.43rem;
+        // position:absolute;
+        position: relative;
         float: right;
+        top: 0;
         right: 0;
         border-left: 0.01rem solid #efefef;
         line-height: 0.43rem;
@@ -340,6 +342,7 @@ export default {
         display: inline-block;
         overflow-y: hidden;
         overflow-x: auto;
+        position: relative;
         width: 3.69rem;
         white-space: nowrap;
         .listeninglisttou_li{
