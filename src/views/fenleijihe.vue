@@ -1,5 +1,6 @@
 <template>
     <div id="fenleijihe">
+      <router-link id="fanhui" tag="div" to="/category/">返回</router-link>
         <div class="listeninglisttou_waibox">
             <div class="listeninglisttou_box"  v-if="isjiahao==false">
                 <ul class="listeninglisttou_ul clear">
@@ -36,8 +37,9 @@
         v-infinite-scroll="loadMore"
         infinite-scroll-disabled="loading"
         infinite-scroll-distance="10"
-        >
-            <li class="jihe_list_li" v-for="data in list.albumBriefDetailInfos" :key="data.id">
+        infinite-scroll-immediate-check='false'>
+          <router-link tag="li" :to="'/detail/'+data.id" class="jihe_list_li" v-for="data in list.albumBriefDetailInfos" :key="data.id">
+            <!-- <li class="jihe_list_li" v-for="data in list.albumBriefDetailInfos" :key="data.id"> -->
                 <img class="jihe_list_li_img" :src="'http://imagev2.xmcdn.com/'+data.albumInfo.cover" :alt="data.albumInfo.title">
                 <div class="jihe_list_li_div">
                     <h3 class="jihe_list_li_div_h3">{{data.albumInfo.title}}</h3>
@@ -47,7 +49,8 @@
                         <i class="iconfont icon-erji"></i><span class="jihe_list_li_div_span">{{data.statCountInfo.playCount | filter}}</span>
                     </p>
                 </div>
-            </li>
+            <!-- </li> -->
+          </router-link>
         </ul>
     </div>
 </template>
@@ -115,7 +118,8 @@ export default {
       issaixuan: false,
       paihang: 0,
       shaixuan: {},
-      index: 1
+      index: 1,
+      loading: false
     }
   },
   props: ['lei', 'juti'],
@@ -140,6 +144,7 @@ export default {
         this.shaixuan[this.jutilist[i].name] = this.jutilist[i].displayName
       }
       this.list = res.data.data.firstPageCategoryAlbums
+      console.log(this.list)
     })
   },
   watch: {
@@ -235,11 +240,13 @@ export default {
         text: '加载中...',
         spinnerType: 'fading-circle'
       })
-      this.index++
-      let aaa = `https://m.ximalaya.com/m-revision/page/category/queryCategoryPage?categoryCode=${this.lei}`
+      this.loading = true
+      this.index += 1
+      let aaa = `https://m.ximalaya.com/m-revision/page/category/queryCategoryAlbumsByPage?categoryCode=${this.lei}`
       if (this.juti != 'quanbu') {
         aaa += `&subCategoryCode=${this.juti}`
       }
+      console.log(this.index)
       aaa += `&page=${this.index}&pageSize=30&sort=${this.paihang}`
       for (let i = 0, z = 0, x = 0; i < this.jutilist.length; i++) {
         if (this.shaixuan[this.jutilist[i].name] != this.jutilist[i].displayName) {
@@ -258,13 +265,22 @@ export default {
           }
         }
       }
+      // https://m.ximalaya.com/m-revision/page/category/queryCategoryPage?categoryCode=youshengshu&subCategoryCode=wenxue&page=3&pageSize=30&sort=0
+      // https://m.ximalaya.com/m-revision/page/category/queryCategoryAlbumsByPage?categoryCode=youshengshu&subCategoryCode=wenxue&page=3&pageSize=30&sort=0
+      console.log(aaa)
       Axios({
         url: aaa
       }).then((res) => {
         Indicator.close()
-        this.leilist = res.data.data.subCategories
-        this.jutilist = res.data.data.categoryMetaDatas
-        this.list = res.data.data.firstPageCategoryAlbums
+        // this.leilist = res.data.data.subCategories
+        // this.jutilist = res.data.data.categoryMetaDatas
+        // this.list = res.data.data.firstPageCategoryAlbums
+        // this.list.albumBriefDetailInfos = res.data.data.albumBriefDetailInfos
+        // console.log(this.list.albumBriefDetailInfos)
+        // console.log(res.data.data.albumBriefDetailInfos)
+        this.list.albumBriefDetailInfos = [...this.list.albumBriefDetailInfos, ...res.data.data.albumBriefDetailInfos]
+        // console.log(this.list.albumBriefDetailInfos)
+        this.loading = false
       })
     },
     saixuan () {
@@ -511,6 +527,17 @@ export default {
                 }
             }
         }
+    }
+    #fanhui{
+      // height: 0.5rem;
+      background-color: white;
+      font-size: 0.18rem;
+      width: 0.7rem;
+      position: fixed;
+      top: 0.15rem;
+      left: 0.15rem;
+      z-index: 500;
+      text-align: center;
     }
 }
 
