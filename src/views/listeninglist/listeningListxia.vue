@@ -101,8 +101,6 @@ export default {
     Axios({
       url: `/revision/subject/categorySubjectList/${this.tou}?pageNum=1&pageSize=20`
     }).then((res) => {
-      // console.log(res.data.data.subjects)
-      // Indicator.close();
       this.tingdanlist = res.data.data.subjects
     })
   },
@@ -122,7 +120,6 @@ export default {
       Axios({
         url: `/revision/subject/categorySubjectList/${this.tou}?pageNum=1&pageSize=20`
       }).then((res) => {
-        // console.log(res.data.data.subjects)
         Indicator.close()
         this.tingdanlist = res.data.data.subjects
         document.documentElement.scrollTop = 0
@@ -139,7 +136,6 @@ export default {
       Axios({
         url: `/revision/subject/categorySubjectList/${this.tou}?pageNum=${this.index}&pageSize=20`
       }).then((res) => {
-        // console.log(res.data.data.subjects)
         Indicator.close()
         this.tingdanlist = [...this.tingdanlist, ...res.data.data.subjects]
         this.loading = false

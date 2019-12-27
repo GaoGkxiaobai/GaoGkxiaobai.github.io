@@ -51,11 +51,9 @@ export default {
   },
   methods: {
     dianjijiahao () {
-      // console.log(1)
       this.isjiahao = true
     },
     dianjichenghao () {
-      // console.log(2)
       this.isjiahao = false
     },
     xiala () {
@@ -77,7 +75,6 @@ export default {
         this.ishuadong = false
       }
       this.oldscrollTop = (document.documentElement.scrollTop || document.body.scrollTop)
-      // console.log(this.oldscrollTop)
     }
   }
 }

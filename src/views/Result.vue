@@ -2,25 +2,25 @@
 <div>
     <searchnav>
       <router-link
-      :to="'/result/all/'+path"
+      :to="'/result/all/'+this.$store.state.resultpath"
       tag="li"
       key="1"
       activeClass="active"
     >全部</router-link>
     <router-link
-      :to="'/result/album/'+path"
+      :to="'/result/album/'+this.$store.state.resultpath"
       tag="li"
       key="2"
       activeClass="active"
     >专辑</router-link>
     <router-link
-      :to="'/result/sound/'+path"
+      :to="'/result/sound/'+this.$store.state.resultpath"
       tag="li"
       key="3"
       activeClass="active"
     >声音</router-link>
     </searchnav>
-    <router-view :path="path"></router-view>
+    <router-view></router-view>
     </div>
 </template>
 
@@ -34,11 +34,10 @@ export default {
   },
   components: {
     searchnav
-  },
-  created () {
-    //  console.log(this.$route.params.all)
-    this.path = this.$route.params.all
   }
+  // created () {
+  //   this.path = this.$route.params.all
+  // }
 
 }
 </script>

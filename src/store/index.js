@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import Axios from 'axios'
-import { GET_HEADNAV_DATA, GET_INDEX_DATA, GET_HEIGHT_DATA, GET_MOVE_DATA, GET_SEARCH_DATA, GET_ALLSEARCH_DATA, GET_SEARCHLIST_DATA, GET_TUIJAIN_DATA, GET_RESULT_DATA } from './type'
+import { GET_HEADNAV_DATA, GET_INDEX_DATA, GET_HEIGHT_DATA, GET_MOVE_DATA, GET_SEARCH_DATA, GET_ALLSEARCH_DATA, GET_SEARCHLIST_DATA, GET_TUIJAIN_DATA, GET_RESULT_DATA, GET_RESULTALBUM_DATA, GET_RESULTSOUND_DATA } from './type'
 import { Indicator } from 'mint-ui'
 Vue.use(Vuex)
 
@@ -16,7 +16,10 @@ export default new Vuex.Store({
     allsearchData: [],
     searchlistData: [],
     tuijianData: [],
-    resultData: null
+    resultData: null,
+    resultalbumData: null,
+    resultsoundData: null,
+    resultpath: ''
   },
   getters: {
 
@@ -51,6 +54,12 @@ export default new Vuex.Store({
     },
     [GET_RESULT_DATA] (state, data) {
       state.resultData = data
+    },
+    [GET_RESULTALBUM_DATA] (state, data) {
+      state.resultalbumData = data
+    },
+    [GET_RESULTSOUND_DATA] (state, data) {
+      state.resultsoundData = data
     }
   },
   actions: {
@@ -67,22 +76,12 @@ export default new Vuex.Store({
       })
     },
     getindexdata (store, name) {
-      // if (name == 'tuijian') {
-      //   Axios({
-      //     url: `https://m.ximalaya.com/m-revision/page/index/queryIndexTabContent?moduleKey=tuijian`
-
-      //   }).then(res => {
-      //     Indicator.close()
-      //     store.commit(GET_INDEX_DATA, res.data.data.moduleContent)
-      //   })
-      // } else {
       Axios({
         url: `https://m.ximalaya.com/m-revision/page/index/queryIndexCategoryTabContent?moduleKey=${name}`
       }).then(res => {
         Indicator.close()
         store.commit(GET_INDEX_DATA, res.data.data.moduleContent)
       })
-      // }
     },
     gettopheight (store, h) {
       store.commit(GET_HEIGHT_DATA, h)
@@ -119,11 +118,25 @@ export default new Vuex.Store({
       Axios({
         url: `https://m.ximalaya.com/m-revision/page/search?kw=${path}&core=all&page=1&rows=5`
       }).then(res => {
-        // console.log(res.data.data)
         store.commit(GET_RESULT_DATA, res.data.data)
+      })
+    },
+    getresultalbum (store, path) {
+      Axios({
+        url: `https://m.ximalaya.com/m-revision/page/search?kw=${path}&core=album&page=1&rows=10`
+      }).then(res => {
+        store.commit(GET_RESULTALBUM_DATA, res.data.data)
+      })
+    },
+    getresultsound (store, path) {
+      Axios({
+        url: `https://m.ximalaya.com/m-revision/page/search?kw=${path}&core=track&page=1&rows=10`
+      }).then(res => {
+        store.commit(GET_RESULTSOUND_DATA, res.data.data)
       })
     }
   },
+
   modules: {
     // 分割模块
 

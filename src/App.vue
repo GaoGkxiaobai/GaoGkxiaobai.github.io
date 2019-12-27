@@ -20,8 +20,8 @@ export default {
     this.$store.dispatch('gettopheight', this.$refs.mytop.offsetHeight)
   },
   watch: {
-    $router () {
-      console.log(this.$route)
+    $route () {
+      this.mytxt = this.$store.state.resultpath
     }
   },
   methods: {

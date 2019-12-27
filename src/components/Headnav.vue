@@ -28,7 +28,6 @@ export default {
     }
   },
   mounted () {
-    // console.log(this.$refs)
     var square = document.querySelector('.' + this.$refs.ul.className)
     var hammer = new Hammer(square)
     hammer.on('swipeleft', function (e) {

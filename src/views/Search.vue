@@ -15,11 +15,13 @@
     </searchnav>
     <router-view></router-view>
     <searchlist v-if="ishow" :mytxt="mytxt"></searchlist>
+    <bottom></bottom>
   </div>
 </template>
 <script>
 import searchnav from '@/components/Searchnav'
 import searchlist from '@/components/Searchlist'
+import bottom from '@/components/bottom'
 
 export default {
   data () {
@@ -45,7 +47,8 @@ export default {
   },
   components: {
     searchnav,
-    searchlist
+    searchlist,
+    bottom
   },
   methods: {
     go () {

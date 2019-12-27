@@ -85,6 +85,7 @@ export default {
       this.$router.push({ name: 'detail', params: { myid: id } })
     },
     listclick (data) {
+      this.$store.state.resultpath = data
       this.$router.push(`/result/all/${data}`)
     }
   },

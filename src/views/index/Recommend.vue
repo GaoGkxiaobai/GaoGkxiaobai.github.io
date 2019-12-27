@@ -57,11 +57,15 @@
         </li>
       </ul>
     </div>
+       <bottom></bottom>
+
   </div>
+
 </template>
 <script>
 import headnav from '@/components/Headnav'
 import swiper from '@/components/Swiper'
+import bottom from '@/components/bottom'
 import Axios from 'axios'
 import { Indicator, InfiniteScroll, Lazyload } from 'mint-ui'
 import Vue from 'vue'
@@ -129,7 +133,8 @@ export default {
   },
   components: {
     headnav,
-    swiper
+    swiper,
+    bottom
   },
 
   beforeCreate () {

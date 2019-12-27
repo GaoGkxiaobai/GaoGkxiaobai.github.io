@@ -74,31 +74,7 @@ export default {
   ],
   components: {
   },
-  mounted () {
-    var square = document.querySelector('.' + this.$refs.ul.className)
-    var hammer = new Hammer(square)
-    hammer.on('swipeup', function (e) {
-      console.log(1)
-      // var ul = e.target.parentNode
-      // var top = ul.offsetTop
-      // if (top <= 0) {
-      //   top = 0
-      // }
-      // ul.style.top = top - 150 + 'px'
-    })
-    hammer.on('swipedown', function (e) {
-      console.log(2)
-      // var ul = e.target.parentNode
-      // var top = ul.offsetTop
-      // var width = ul.offsetWidth
-      // if (top > -150) {
-      //   top = -150
-      // }
-      // ul.style.top = top + 150 + 'px'
-    })
-  },
-  watch: {
-  },
+
   methods: {
   }
 }

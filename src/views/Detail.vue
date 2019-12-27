@@ -134,17 +134,15 @@ export default {
   },
   mounted () {
     // 获取id
-    // console.log(this.$route.params) // 正在访问路由
+    // this.$route.params // 正在访问路由
     // 头部信息
     Axios({
       url: `/revision/album?albumId=${this.$route.params.myid}`
     }).then(res => {
-      // console.log(res.data.data)
       this.toulist = res.data.data
       Axios({
         url: `https://m.ximalaya.com/m-revision/common/anchor/queryAnchorAlbumsByPage?anchorId=${this.toulist.anchorInfo.anchorId}&page=1&pageSize=3&asc=false`
       }).then(res1 => {
-        // console.log(res1.data.data.albumBriefDetailInfos[0])
         this.xiangqing = res1.data.data.albumBriefDetailInfos[0]
         this.xiangqing.albumInfo.shortIntro = this.xiangqing.albumInfo.shortIntro.replace(' ', '<br><br>')
       })
@@ -153,7 +151,6 @@ export default {
     Axios({
       url: `https://m.ximalaya.com/m-revision/common/album/queryAlbumTrackRecordsByPage?albumId=${this.$route.params.myid}&page=1&pageSize=10&asc=true`
     }).then((res2) => {
-      // console.log(res2.data.data.trackDetailInfos)
       if (Math.floor(res2.data.data.totalCount / res2.data.data.pageSize) == res2.data.data.page) {
         this.jiemu = false
       }
@@ -163,7 +160,6 @@ export default {
     Axios({
       url: `https://m.ximalaya.com/m-revision/common/album/queryAlbumRelatedRecommendAlbums?albumId=${this.$route.params.myid}&page=1&pageSize=6`
     }).then((res3) => {
-      // console.log(res3.data.data.albumBriefDetailInfos)
       if (Math.floor(res3.data.data.totalCount / res3.data.data.pageSize) == res3.data.data.page) {
         this.isxiangsizhuanjil = false
       }
@@ -181,7 +177,6 @@ export default {
       Axios({
         url: `https://m.ximalaya.com/m-revision/common/album/queryAlbumTrackRecordsByPage?albumId=${this.$route.params.myid}&page=${this.jiemulistid}&pageSize=10&asc=true`
       }).then((res) => {
-        // console.log(res2.data.data.trackDetailInfos)
         if (Math.floor(res.data.data.totalCount / res.data.data.pageSize) == res.data.data.page) {
           this.jiemu = false
         }
@@ -191,11 +186,9 @@ export default {
     // 换一批
     xiangsizhuanjihuan () {
       this.xiangsizhuanjilistid++
-      // console.log(this.xiangsizhuanjilistid)
       Axios({
         url: `https://m.ximalaya.com/m-revision/common/album/queryAlbumRelatedRecommendAlbums?albumId=${this.$route.params.myid}&page=${this.xiangsizhuanjilistid}&pageSize=6`
       }).then((res2) => {
-        // console.log(res2.data.data.albumBriefDetailInfos)
         if (Math.floor(res2.data.data.totalCount / res2.data.data.pageSize) == res2.data.data.page) {
           this.isxiangsizhuanjil = false
         }

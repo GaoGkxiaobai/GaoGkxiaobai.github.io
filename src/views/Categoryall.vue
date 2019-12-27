@@ -7,7 +7,7 @@
       </ul>
       <ul v-for="data in datalist" :key="data.category.categoryId" class="rul" :id="data.category.categoryId">
         <h3><p>{{data.category.displayName}}</p>/共{{data.albumCount}}张专辑 <span>></span></h3>
-        <li v-for="item in data.category.subCategories" :key="item.link">
+        <li v-for="item in data.category.subCategories" :key="item.link" @click="categoryclick(item.link)">
            {{item.displayValue}}
         </li>
       </ul>
@@ -41,6 +41,9 @@ export default {
       // document.querySelector('a').removeAttribute('class','');
       // console.log(evt)
       // evt.target.setAttribute('class','active')
+    },
+    categoryclick (id) {
+      this.$router.push(`/jihe/${id}`)
     }
     // myscroll(){
     //   // console.log(this.$refs.scrolla[0])

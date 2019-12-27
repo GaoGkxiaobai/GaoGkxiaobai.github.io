@@ -21,6 +21,7 @@ export default {
   },
   methods: {
     searchclick (data) {
+      this.$store.state.resultpath = data
       this.$router.push(`/result/all/${data}`)
     }
   }
@@ -29,6 +30,7 @@ export default {
 <style lang="scss" scoped>
 div {
   width: 100%;
+  margin-top: 0.1rem;
   .toli {
     height: 0.45rem;
     position: relative;
@@ -58,6 +60,7 @@ div {
     span {
       font: 0.2rem/0.45rem "宋体";
       color: #ef0b0b;
+      position: absolute;
     }
   }
 

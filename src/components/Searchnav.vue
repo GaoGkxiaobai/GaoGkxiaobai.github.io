@@ -37,7 +37,6 @@ ul {
   margin-top: 0.5rem;
   width: 150%;
   height: 0.4rem;
-  margin-bottom: 0.1rem;
   padding: 0.01rem;
   position: relative;
   left: 0;

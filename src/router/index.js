@@ -94,11 +94,11 @@ const routes = [
         component: () => import('@/views/result/ResultAll')
       },
       {
-        path: '/result/album/:album',
+        path: '/result/album/:album', // 专辑
         component: () => import('@/views/result/Album')
       },
       {
-        path: '/result/sound/:sound',
+        path: '/result/sound/:sound', // 声音
         component: () => import('@/views/result/Sound')
       },
       {

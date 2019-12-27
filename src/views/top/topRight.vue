@@ -92,7 +92,6 @@ export default {
   },
   watch: {
     $route (to, from) {
-      // console.log(to.path);
       this.rightlist()
     }
   },
@@ -106,21 +105,11 @@ export default {
       Axios({
         url: `https://m.ximalaya.com/m-revision/page/rank/queryRank?clusterCode=${this.top}&categoryCode=${this.left}`
       }).then((res) => {
-        // console.log(res.data.data.rankModuleInfoList)
         Indicator.close()
         this.list = res.data.data.rankModuleInfoList
         document.documentElement.scrollTop = 0
         document.body.scrollTop = 0
       })
-    //   this.$nextTick(() => {
-    // // console.log(1)
-    //   new BScroll('.ggk1', {
-    //     scrollbar: {
-    //       fade: true,
-    //       interactive: false // 1.8.0 新增
-    //     }
-    //   })
-    // })
     }
   },
   mounted () {
@@ -132,49 +121,17 @@ export default {
     Axios({
       url: `https://m.ximalaya.com/m-revision/page/rank/queryRank?clusterCode=${this.top}&categoryCode=${this.left}`
     }).then((res) => {
-      // console.log(res.data.data.rankModuleInfoList)
       Indicator.close()
       this.list = res.data.data.rankModuleInfoList
       document.documentElement.scrollTop = 0
       document.body.scrollTop = 0
     })
-    // this.$nextTick(() => {
-    // // console.log(1)
-    //   new BScroll('.ggk1', {
-    //     scrollbar: {
-    //       fade: true,
-    //       interactive: false // 1.8.0 新增
-    //     }
-    //   })
-    // })
   }
-  // beforeUpdate() {
-  //   // console.log(1)
-  //   Axios({
-  //     url: `https://m.ximalaya.com/m-revision/page/rank/queryRank?clusterCode=${this.top}&categoryCode=${this.left}`
-  //   }).then((res) => {
-  //     console.log(res.data.data.rankModuleInfoList)
-  //     this.list = res.data.data.rankModuleInfoList
-  //   })
-  // }
 
-  // updated() {
-  //   // console.log(1)
-  //   Axios({
-  //     url: `https://m.ximalaya.com/m-revision/page/rank/queryRank?clusterCode=${this.top}&categoryCode=${this.left}`
-  //   }).then((res) => {
-  //     console.log(res.data.data.rankModuleInfoList)
-  //     this.list = res.data.data.rankModuleInfoList
-  //   })
-  // }
 }
 </script>
 <style lang="scss" scoped>
-//   position: absolute;
-  //   top:0;
-  //   left: 0.73rem;
-  //   width: 3.37rem;
-  //   overflow: hidden;
+
 .waicheng{
   width: 100%;
   height: 100%;
