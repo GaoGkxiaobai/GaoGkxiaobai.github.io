@@ -2,21 +2,16 @@
     <div id="fenleijihe">
       <router-link id="fanhui" tag="div" to="/category/">返回</router-link>
         <div class="listeninglisttou_waibox">
-            <div class="listeninglisttou_box"  v-if="isjiahao==false">
+            <div class="listeninglisttou_box clear"  v-if="isjiahao==false">
                 <ul class="listeninglisttou_ul clear">
                     <router-link :to="'/jihe/'+this.lei+'/quanbu/'" class="listeninglisttou_li" tag="li" activeClass="activetingtou">全部</router-link>
                     <router-link v-for="data in leilist" :key="data.position" :to="'/jihe'+data.link" class="listeninglisttou_li" tag="li" activeClass="activetingtou">{{data.metaDataValue}}</router-link>
                 </ul>
-                <div class="listeninglisttou_right" @click="dianjijiahao()">
-                    ➕
-                </div>
-
+                <div class="listeninglisttou_right" @click="dianjijiahao()">➕</div>
             </div>
             <div class="isjiahao_box" v-if="isjiahao==true">
                 <p class="isjiahao_left">请选择分类</p>
-                <div class="isjiahao_right" @click="dianjichenghao()">
-                    ➖
-                </div>
+                <div class="isjiahao_right" @click="dianjichenghao()">➖</div>
                 <ul class="isjiahao_ul clear" >
                     <router-link :to="'/jihe/'+this.lei+'/quanbu/'" class="isjiahao_li" tag="li" activeClass="activetingtou">全部</router-link>
                     <router-link v-for="data in leilist" :key="data.position" :to="'/jihe'+data.link" class="isjiahao_li" tag="li" activeClass="activetingtou">{{data.metaDataValue}}</router-link>
@@ -324,7 +319,6 @@ export default {
     .listeninglisttou_right{
         width: 0.44rem;
         height: 0.43rem;
-        // position:absolute;
         position: relative;
         float: right;
         top: 0;

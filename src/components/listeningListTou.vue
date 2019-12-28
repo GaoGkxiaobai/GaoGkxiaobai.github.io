@@ -109,9 +109,7 @@ export default {
         width: 0.44rem;
         height: 0.43rem;
         float: right;
-        // position: absolute;
         right: 0;
-        // display: inline-block;
         border-left: 0.01rem solid #efefef;
         line-height: 0.43rem;
         text-align: center;
